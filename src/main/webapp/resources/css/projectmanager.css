@@ -1,0 +1,33 @@
+ul > li:nth-child(odd) { background-color:#eee; }
+ul > li:nth-child(even) { background-color:#fff; }
+
+ul > li:hover
+{ 
+background-color:#F6F4F0;
+}
+
+.span4 > div, .span8 > div, .span6 > div
+{
+   background-color:#eee;
+   border: 0.5px solid #888;
+   border-radius:20px;
+}
+
+.span12 > div{
+	background-color:#eee;
+	border-radius:20px;
+}
+
+.projectnormal{float:left}
+.projectdelete{float:right}
+
+.projecthead{
+	font-size: 26px;
+}
+
+/***
+.legendspan{
+	margin-left:10px;
+}
+
+**/
