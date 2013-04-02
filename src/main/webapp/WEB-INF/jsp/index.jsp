@@ -57,7 +57,7 @@
          	<c:forEach items="${projectList}" var="project">	
          		<tr>  
             		<td><c:out value="${project.code}" /></td>  
-            		<td><a href="projectsphases/${project.id}"><c:out value="${project.name}" /> </a></td>  
+            		<td><a href="projects/${project.id}"><c:out value="${project.name}" /> </a></td>  
             		<td><c:out value="${project.location.name}" /> </td>  
             		<td><c:out value="${project.projectStatus.name}" /> </td>
             		<td><a href="projects/${project.id}">Delete</a></td>  

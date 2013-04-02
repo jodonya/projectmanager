@@ -17,21 +17,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.asal.projectmanager.converter.DatePropertyEditor;
 import com.asal.projectmanager.dao.LocationDao;
 import com.asal.projectmanager.dao.ProjectDao;
+import com.asal.projectmanager.dao.ProjectMilestoneDao;
+import com.asal.projectmanager.dao.ProjectPhaseDao;
 import com.asal.projectmanager.dao.ProjectStatusDao;
 import com.asal.projectmanager.dao.ProjectTypeDao;
 import com.asal.projectmanager.dao.ProjectUserDao;
 import com.asal.projectmanager.dao.RoleDao;
+import com.asal.projectmanager.dao.TaskDao;
 import com.asal.projectmanager.domain.Location;
 import com.asal.projectmanager.domain.Project;
+import com.asal.projectmanager.domain.ProjectMilestone;
+import com.asal.projectmanager.domain.ProjectPhase;
 import com.asal.projectmanager.domain.ProjectStatus;
 import com.asal.projectmanager.domain.ProjectType;
 import com.asal.projectmanager.domain.ProjectUser;
 import com.asal.projectmanager.domain.Role;
+import com.asal.projectmanager.domain.Task;
 
 @Controller
 @SessionAttributes({ "user" })
@@ -58,6 +65,15 @@ public class ProjectManagementController {
 
 	@Autowired
 	ProjectDao projectDao;
+	
+	@Autowired
+	ProjectPhaseDao projectPhaseDao;
+	
+	@Autowired
+	ProjectMilestoneDao projectMilestoneDao;
+	
+	@Autowired
+	TaskDao taskDao;
 	
 	protected Long id;
 
@@ -383,10 +399,44 @@ public class ProjectManagementController {
 	}
 
 	@RequestMapping(value = "/projects/{id}", method = RequestMethod.GET)
-	public String deleteProject(@PathVariable("id") Long id) {
-		projectDao.deleteById(id);
+	@Transactional
+	public String showProject(@PathVariable("id") Long id, @ModelAttribute("project") Project project, @ModelAttribute("projectPhase") ProjectPhase projectPhase, 
+			@ModelAttribute("projectMilestone") ProjectMilestone projectMilestone, @ModelAttribute("task") Task task, Map<String, Object> model) {
+		//projectDao.deleteById(id);
+//		List<ProjectUser> projectUserList = projectUserDao.findAll();
+//		model.put("projectUserList", projectUserList);
+//
+//		List<ProjectType> projectTypeList = projectTypeDao.findAll();
+//		model.put("projectTypeList", projectTypeList);
+//
+		List<ProjectStatus> projectStatusList = projectStatusDao.findAll();
+		model.put("projectStatusList", projectStatusList);
+//
+//		List<Location> locationList = locationDao.findAll();
+//		model.put("locationList", locationList);
+//
+//		List<Project> projectList = projectDao.findAll();
+//		model.put("projectList", projectList);
+		
+		//Lists
+		//
 
-		return "redirect:/index.html";
+		project = projectDao.findOne(id);
+		model.remove("project");
+		model.put("project", project);
+		//return "redirect:/index.html";
+		
+		//phaseList, milestoneList, tasksList
+		List<ProjectPhase> phaseList = projectPhaseDao.findAll();
+		model.put("phaseList",phaseList);
+		
+		List<ProjectMilestone> milestoneList = projectMilestoneDao.findAll();
+		model.put("milestoneList", milestoneList);
+		
+		List<Task> taskList = taskDao.findAll();
+		model.put("taskList", taskList);
+		
+		return "phases";
 	}
 
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
@@ -503,6 +553,45 @@ public class ProjectManagementController {
 		//return "project";
 		//return "redirect:/project.html/"+id;
 		return "project";
+	}
+	
+		
+	@RequestMapping(value = "/projects/projectPhase.html/{projectId}", method = RequestMethod.POST)
+	@Transactional
+	public String addPhase(@ModelAttribute("projectPhase") ProjectPhase projectPhase,  @PathVariable("projectId") Long projectId,
+			Map<String, Object> model){
+		
+		logger.info("############## Project ID  is "+projectId);
+			Project project = projectDao.findOne(projectId);
+			projectPhase.setProject(project);
+			projectPhaseDao.save(projectPhase);
+		projectPhase = new ProjectPhase();
+		
+		return "redirect:/projects/"+projectId;
+	}
+	
+	@RequestMapping(value = "/projects/milestone.html/{projectId}", method = RequestMethod.POST)
+	@Transactional
+	public String addMilestone(@ModelAttribute("projectMilestone") ProjectMilestone projectMilestone,  @PathVariable("projectId") Long projectId,
+			Map<String, Object> model){
+		ProjectPhase projectPhase = projectPhaseDao.findOne(2L);
+		
+		
+		projectMilestone.setProjectPhase(projectPhase);
+		projectMilestoneDao.save(projectMilestone);
+		return "redirect:/projects/"+projectId;
+	}
+	
+	@RequestMapping(value = "/projects/task.html/{projectId}", method = RequestMethod.POST)
+	@Transactional
+	public String addTask(@ModelAttribute("task") Task task,  @PathVariable("projectId") Long projectId,
+			Map<String, Object> model){
+		
+		ProjectMilestone projectMilestone = projectMilestoneDao.findOne(1L);
+		task.setMilestone(projectMilestone);
+		taskDao.save(task);
+		
+		return "redirect:/projects/"+projectId;
 	}
 
 }

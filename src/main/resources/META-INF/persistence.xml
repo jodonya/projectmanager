@@ -18,6 +18,10 @@
 		<class>com.asal.projectmanager.domain.ProjectStatus</class>
 		<class>com.asal.projectmanager.domain.ProjectType</class>
 		<class>com.asal.projectmanager.domain.Project</class>
+		<class>com.asal.projectmanager.domain.ProjectPhase</class>
+		<class>com.asal.projectmanager.domain.ProjectMilestone</class>
+		<class>com.asal.projectmanager.domain.Task</class>
+		<class>com.asal.projectmanager.domain.TaskComment</class>
 	
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

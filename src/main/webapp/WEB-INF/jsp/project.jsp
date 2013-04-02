@@ -226,14 +226,14 @@
 							<c:forEach items="${projectList}" var="project">	
 			         		<li>  
 			         			
-			            		<span class="projectnormal projecthead"><a href="projectsphases/${project.id}"><c:out value="${project.name}" /></a></span><br/>  
+			            		<span class="projectnormal projecthead"><a href="projects/${project.id}"><c:out value="${project.name}" /></a></span><br/>  
 			            		<span class="projectnormal"><c:out value="${project.code}" /> </span> <br/>
 			            		<span class="projectnormal"><c:out value="${project.location.name}" /> </span><br/>
 			            		<span class="projectnormal"><c:out value="${project.projectStatus.name}" /> </span>
 			            		 
-			            		 <span class="projectdelete"><a href="projectsphases/${project.id}">Add Phases</a> | <a href="/projectmanager/projectedit/${project.id}">Edit</a> | <a href="projectmainpage/${project.id}">Delete</a></span>  
+			            		 <span class="projectdelete"><a href="projects/${project.id}">Add Phases</a> | <a href="/projectmanager/projectedit/${project.id}">Edit</a> | <a href="projectmainpage/${project.id}">Delete</a></span>  
 			            		<hr/>
-			            		<span class="projectdelete"><a href="projectsshowphases/${project.id}">Show Phases for <c:out value="${project.name}" /> </a></span> <br/>
+			            		<span class="projectdelete"><a href="projects/${project.id}">Show Phases for <c:out value="${project.name}" /> </a></span> <br/>
 			            		<hr/>
 			            		 
 			          		</li>  

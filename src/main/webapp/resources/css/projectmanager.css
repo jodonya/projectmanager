@@ -31,3 +31,24 @@ background-color:#F6F4F0;
 }
 
 **/
+
+.form-horizontal .control-label-projectmanagement {
+  float: left;
+  /* width: 160px; **/
+  width: 80px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.form-horizontal .controls-projectmanagement {
+  *display: inline-block;
+  *padding-left: 20px;
+  /**margin-left: 180px; **/
+  margin-left: 80px;
+  *margin-left: 0;
+}
+
+.input-xlarge-projectmanagement {
+  width: 200px;
+}
+
