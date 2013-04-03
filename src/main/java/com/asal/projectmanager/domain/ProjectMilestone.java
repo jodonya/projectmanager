@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,8 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue(value="PMILESTONE")
 @Table(name="projectmilestone")
-public class ProjectMilestone implements Serializable {
+public class ProjectMilestone extends DomainObject {
 	
 	/**
 	 * 
@@ -25,25 +27,7 @@ public class ProjectMilestone implements Serializable {
 	private static final long serialVersionUID = -4820415491061767929L;
 
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
-	
-	private Timestamp created;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="createdby")
-	private ProjectUser createdBy;
-	
-	private Timestamp updated;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="updatedby")
-	private ProjectUser updatedBy;
-	
-	@Column(name="isactive")
-	private String isActive;
+
 	private String name;
 
 	private Date deadLine;
@@ -52,53 +36,6 @@ public class ProjectMilestone implements Serializable {
 	@JoinColumn(name="project_phase_id")
 	private ProjectPhase projectPhase;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Timestamp getCreated() {
-		return created;
-	}
-
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-
-	public ProjectUser getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(ProjectUser createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Timestamp getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
-	}
-
-	public ProjectUser getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(ProjectUser updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public String getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(String isActive) {
-		this.isActive = isActive;
-	}
 
 	public String getName() {
 		return name;

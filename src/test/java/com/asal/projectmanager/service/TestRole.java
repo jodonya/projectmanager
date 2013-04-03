@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.dao.RoleDao;
 import com.asal.projectmanager.domain.Role;
-import com.asal.projectmanager.service.RoleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration({"classpath*:applicationContext.xml"})

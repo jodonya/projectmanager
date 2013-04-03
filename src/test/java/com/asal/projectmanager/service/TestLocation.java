@@ -29,7 +29,7 @@ public class TestLocation {
 		
 		locationDao.save(location);
 		
-		Assert.assertTrue(locationDao.count() > 1);
+		Assert.assertTrue(locationDao.count() > 0);
 	}
 
 }

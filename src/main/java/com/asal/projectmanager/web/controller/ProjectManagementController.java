@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.asal.projectmanager.converter.DatePropertyEditor;
@@ -30,6 +29,7 @@ import com.asal.projectmanager.dao.ProjectTypeDao;
 import com.asal.projectmanager.dao.ProjectUserDao;
 import com.asal.projectmanager.dao.RoleDao;
 import com.asal.projectmanager.dao.TaskDao;
+import com.asal.projectmanager.dao.UserRoleDao;
 import com.asal.projectmanager.domain.Location;
 import com.asal.projectmanager.domain.Project;
 import com.asal.projectmanager.domain.ProjectMilestone;
@@ -39,6 +39,7 @@ import com.asal.projectmanager.domain.ProjectType;
 import com.asal.projectmanager.domain.ProjectUser;
 import com.asal.projectmanager.domain.Role;
 import com.asal.projectmanager.domain.Task;
+import com.asal.projectmanager.domain.UserRole;
 
 @Controller
 @SessionAttributes({ "user" })
@@ -74,6 +75,9 @@ public class ProjectManagementController {
 	
 	@Autowired
 	TaskDao taskDao;
+	
+	@Autowired
+	UserRoleDao userRoleDao;
 	
 	protected Long id;
 
@@ -271,6 +275,15 @@ public class ProjectManagementController {
 			Map<String, Object> model) {
 
 		projectUserDao.save(projectUser);
+		projectUser = projectUserDao.findUser(projectUser.getEmail());
+		
+		UserRole userRole = new UserRole();
+		userRole.setAuthority("ROLE_USER");
+		userRole.setUser(projectUser);
+		
+		userRoleDao.save(userRole);
+		
+		
 
 		List<ProjectUser> projectUserList = projectUserDao.findAll();
 		model.put("projectUserList", projectUserList);

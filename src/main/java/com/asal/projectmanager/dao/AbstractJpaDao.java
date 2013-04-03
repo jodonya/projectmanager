@@ -1,6 +1,7 @@
 package com.asal.projectmanager.dao;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +11,9 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractJpaDao <T extends Serializable> {
+import com.asal.projectmanager.domain.DomainObject;
+
+public abstract class AbstractJpaDao <T extends DomainObject> {
 	private Class<T> clazz;
 	
 	@PersistenceContext
@@ -34,12 +37,15 @@ public abstract class AbstractJpaDao <T extends Serializable> {
 	@Transactional
 	public void save(final T entity){
 		//entityManager.persist(entity);
+		entity.setCreated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		entity.setIsactive("Y");
 		entityManager.merge(entity);
 		entityManager.flush();
 	}
 	
 	@Transactional
 	public void update(final T entity){
+		entity.setUpdated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		entityManager.merge(entity);
 	}
 	

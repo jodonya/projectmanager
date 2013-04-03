@@ -8,12 +8,13 @@
 	<link href="/projectmanager/resources/datepicker/css/bootstrap-responsive.css" media="all" rel="stylesheet" type="text/css"/>
 	<link href="/projectmanager/resources/datepicker/css/datepicker.css" media="all" rel="stylesheet" type="text/css"/>
 	<link href="/projectmanager/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
-	
     
     <!--  link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" -->
     <link rel="stylesheet" type="text/css" media="screen"
      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">	
      
+     <script type="text/javascript" src="/projectmanager/resources/js/jquery-1.9.0.js"></script>
+	<script type="text/javascript" src="/projectmanager/resources/js/projectmanager.js"></script>	     
 </head>
 <body>
 
@@ -44,7 +45,7 @@
          <tbody>  
          	<c:forEach items="${phaseList}" var="projectPhase">	
          		<tr>  
-            		<td><a href="projects/${project.id}/phases/${projectPhase.id}"><c:out value="${projectPhase.name}" /> </a></td>  
+            		<td class="projectPhase"><c:out value="${projectPhase.name}" /></td>  
             		<td><c:out value="${projectPhase.phaseDuration}" /> </td>  
             		<td><c:out value="${projectPhase.status.name}" /> </td>
             		<td><a href="projects/${project.id}/phases/${projectPhase.id}">Delete</a></td>  

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,36 +14,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
+@DiscriminatorValue(value="USERS")
 @Table(name="users")
-public class ProjectUser implements Serializable {
+public class ProjectUser extends DomainObject {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2825865503011341092L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
-	private Timestamp created;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="createdby")
-	private ProjectUser createdBy;
-	
-	private Timestamp updated;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="updatedby")
-	private ProjectUser updatedBy;
-	
-	@Column(name="isactive")
-	private String isActive;
 	
 //	@NotNull
 //	@Size(min=1, max=20)
@@ -74,45 +56,6 @@ public class ProjectUser implements Serializable {
 	
 	@Transient
 	private Boolean isLoggedIn = false;
-	
-	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Timestamp getCreated() {
-		return created;
-	}
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-	public ProjectUser getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(ProjectUser createdBy) {
-		this.createdBy = createdBy;
-	}
-	public Timestamp getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
-	}
-	public ProjectUser getUpdatedBy() {
-		return updatedBy;
-	}
-	public void setUpdatedBy(ProjectUser updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	public String getIsActive() {
-		return isActive;
-	}
-	public void setIsActive(String isActive) {
-		this.isActive = isActive;
-	}
 	public String getFirstName() {
 		return firstName;
 	}
