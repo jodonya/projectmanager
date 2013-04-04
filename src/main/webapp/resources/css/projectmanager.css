@@ -52,3 +52,13 @@ background-color:#F6F4F0;
   width: 200px;
 }
 
+.input-xlarge-post {
+width: 350px;
+height: 130px;
+}
+
+ul.commentRight{
+	float: right;
+	list-style: none;
+}
+

@@ -22,7 +22,7 @@
  			<div class="span12">
  				<div class="row">
  						<div class="span8"><h1 class="page-header">Project Management - ASAL</h1></div>
- 						<div class="span4"><span>Welcome <c:out value="${logedInUser.firstName}"></c:out>  <c:out value="${logedInUser.lastName}"></c:out></span> | <a href="/projectmanager/logout.html">Logout</a> | <a href="/projectmanager/index.html">Home</a></div>
+ 						<div class="span4"><span>Welcome <c:out value="${logedInUser.firstName}"></c:out>  <c:out value="${logedInUser.lastName}"></c:out></span> | <a href="/projectmanager/logout.html">Logout</a> |<a href="/projectmanager/posts">Forum</a>| <a href="/projectmanager/index.html">Home</a></div>
  				</div>
  			</div>
  		</div>

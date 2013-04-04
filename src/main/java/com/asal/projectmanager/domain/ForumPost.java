@@ -1,10 +1,14 @@
 package com.asal.projectmanager.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /****
@@ -16,6 +20,7 @@ import javax.persistence.Table;
 @DiscriminatorValue(value="FORUMPOST")
 @Table(name="forumpost")
 
+
 public class ForumPost extends DomainObject {
 
 	
@@ -25,10 +30,16 @@ public class ForumPost extends DomainObject {
 	private static final long serialVersionUID = 1L;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="forum_id")
+	
 	private Forum forum;
 	private String name;
 	private Long upcount;
 	private Long downcount;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="forumPost")
+	private List<PostComment> listComments; 
+
+	
 	public Forum getForum() {
 		return forum;
 	}
@@ -52,6 +63,14 @@ public class ForumPost extends DomainObject {
 	}
 	public void setDowncount(Long downcount) {
 		this.downcount = downcount;
+	}
+	
+	
+	public List<PostComment> getListComments() {
+		return listComments;
+	}
+	public void setListComments(List<PostComment> listComments) {
+		this.listComments = listComments;
 	}
 	@Override
 	public String toString() {

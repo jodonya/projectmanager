@@ -78,7 +78,7 @@ public class LoginController {
 		
 
 		
-		return "index";
+		return "redirect:/posts";
  
 	}
 	

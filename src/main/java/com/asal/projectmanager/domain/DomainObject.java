@@ -34,7 +34,7 @@ public class DomainObject implements Serializable{
 	
 	private Timestamp created;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="createdby")
 	private ProjectUser createdBy;
 	

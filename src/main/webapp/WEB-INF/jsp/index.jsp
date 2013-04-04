@@ -16,7 +16,7 @@
   			<div>
   				<div class="row">
   					<div class="span8"><h1 class="page-header">ASAL Project Management</h1></div>
-  					<div class="span4"><span>Welcome <c:out value="${logedInUser.firstName}"></c:out>  <c:out value="${logedInUser.lastName}"></c:out></span> | <a href="/projectmanager/logout.html">Logout</a> </div>
+  					<div class="span4"><span>Welcome <c:out value="${logedInUser.firstName}"></c:out>  <c:out value="${logedInUser.lastName}"></c:out></span> |<a href="/projectmanager/posts">Forum</a>| <a href="/projectmanager/logout.html">Logout</a> </div>
   				</div>
   				
   					
@@ -38,6 +38,7 @@
     			<!--  a href="/projectmanager/addgreeting.html">Add Project</a>|
 				<a href="/projectmanager/greetings.html">Show all Projects</a>|  -->
 				<a href="/projectmanager/project.html">Add Project</a>|
+				<a href="/projectmanager/posts">Forum</a>|
 				<a href="/projectmanager/setup.html">Setup</a> 
 			</p>
 			

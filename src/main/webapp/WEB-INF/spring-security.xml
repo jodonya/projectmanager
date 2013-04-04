@@ -10,6 +10,8 @@
 	<http auto-config="true">
 		<intercept-url pattern="/welcome*" access="ROLE_USER" />
 		<intercept-url pattern="/index*" access="ROLE_USER" />
+		<intercept-url pattern="/posts*" access="ROLE_USER" />
+		<intercept-url pattern="/phases*" access="ROLE_USER" />
 		<intercept-url pattern="/project*" access="ROLE_USER" />
 		<intercept-url pattern="/setup*" access="ROLE_USER" />
 		<intercept-url pattern="/" access="ROLE_USER" />
@@ -46,7 +48,7 @@
 	
 	<authentication-manager>
 	   <authentication-provider>
-		<jdbc-user-service data-source-ref="dataSource"
+		<jdbc-user-service data-source-ref="pooledDataSource"
  
 		   users-by-username-query="
 		      select email,password, isactive  

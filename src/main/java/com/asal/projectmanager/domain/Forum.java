@@ -1,8 +1,14 @@
 package com.asal.projectmanager.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 /****
  *@author japheth
@@ -17,6 +23,7 @@ public class Forum extends DomainObject {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String name;
 
@@ -32,6 +39,9 @@ public class Forum extends DomainObject {
 	public String toString() {
 		return name;
 	}
+
+	
+	
 
 	@Override
 	public int hashCode() {
