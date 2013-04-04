@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,14 @@ import com.asal.projectmanager.domain.ProjectStatus;
 import com.asal.projectmanager.domain.ProjectUser;
 
 @Controller
+@Scope("request")
 @SessionAttributes({"logedInUser"})
 public class LoginController {
 	
 	protected static Logger logger = Logger.getLogger(LoginController.class);
+	
+	@Autowired
+	ProjectManagerSession projectManagerSession;
 	
 	@Autowired
 	ProjectUserDao projectUserDao;
@@ -68,6 +73,7 @@ public class LoginController {
 //			return "login";
 //		
 //		logedInUser.setIsLoggedIn(true);
+		projectManagerSession.setUser(logedInUser);
 		model.addAttribute("logedInUser", logedInUser);
 		
 

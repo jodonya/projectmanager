@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -42,12 +43,16 @@ import com.asal.projectmanager.domain.Task;
 import com.asal.projectmanager.domain.UserRole;
 
 @Controller
+@Scope("session")
 @SessionAttributes({ "user" })
 // @Secured("ROLE_USER")
 public class ProjectManagementController {
 
 	protected static Logger logger = Logger
 			.getLogger(ProjectManagementController.class);
+	
+	@Autowired
+	ProjectManagerSession projectManagerSession;
 
 	@Autowired
 	RoleDao roleDao;
@@ -150,7 +155,7 @@ public class ProjectManagementController {
 	public String addRole(@ModelAttribute("role") Role role,
 			@ModelAttribute("projectType") ProjectType projectType,
 			@ModelAttribute("location") Location location,
-			@ModelAttribute("projectStatus") ProjectStatus projectStatus,
+			@ModelAttribute("projectStatus") ProjectStatus projectStatus, 
 			Map<String, Object> model) {
 		logger.info(" Entering addRole");
 		roleDao.save(role);
@@ -271,7 +276,7 @@ public class ProjectManagementController {
 	@Transactional
 	public String addUser(
 			@ModelAttribute("projectUser") ProjectUser projectUser,
-			@ModelAttribute Role role, BindingResult result,
+			@ModelAttribute Role role, BindingResult result, 
 			Map<String, Object> model) {
 
 		projectUserDao.save(projectUser);
@@ -571,7 +576,8 @@ public class ProjectManagementController {
 		
 	@RequestMapping(value = "/projects/projectPhase.html/{projectId}", method = RequestMethod.POST)
 	@Transactional
-	public String addPhase(@ModelAttribute("projectPhase") ProjectPhase projectPhase,  @PathVariable("projectId") Long projectId,
+	public String addPhase(@ModelAttribute("projectPhase") ProjectPhase projectPhase,
+			@PathVariable("projectId") Long projectId,
 			Map<String, Object> model){
 		
 		logger.info("############## Project ID  is "+projectId);
@@ -585,10 +591,10 @@ public class ProjectManagementController {
 	
 	@RequestMapping(value = "/projects/milestone.html/{projectId}", method = RequestMethod.POST)
 	@Transactional
-	public String addMilestone(@ModelAttribute("projectMilestone") ProjectMilestone projectMilestone,  @PathVariable("projectId") Long projectId,
+	public String addMilestone(@ModelAttribute("projectMilestone") ProjectMilestone projectMilestone,
+			@PathVariable("projectId") Long projectId,
 			Map<String, Object> model){
 		ProjectPhase projectPhase = projectPhaseDao.findOne(2L);
-		
 		
 		projectMilestone.setProjectPhase(projectPhase);
 		projectMilestoneDao.save(projectMilestone);
