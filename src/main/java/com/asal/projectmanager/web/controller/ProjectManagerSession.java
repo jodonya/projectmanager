@@ -1,16 +1,18 @@
 package com.asal.projectmanager.web.controller;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import com.asal.projectmanager.domain.ProjectUser;
 
 @Component
-@Scope("session")
+//@Scope("session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ProjectManagerSession {
 	private int pageSize;
 	private int offset;
-	private static ProjectUser user;
+	private ProjectUser user;
 	
 	public ProjectManagerSession(){
 		pageSize = 5;
@@ -35,11 +37,11 @@ public class ProjectManagerSession {
 	}
 
 
-	public static ProjectUser getUser() {
+	public ProjectUser getUser() {
 		return user;
 	}
 
-	public static void setUser(ProjectUser auser) {
+	public void setUser(ProjectUser auser) {
 		user = auser;
 	}	
 	

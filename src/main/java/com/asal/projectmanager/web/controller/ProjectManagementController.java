@@ -1,5 +1,7 @@
 package com.asal.projectmanager.web.controller;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -272,13 +274,14 @@ public class ProjectManagementController {
 		return "setup";
 	}
 
-	@RequestMapping(value = { "/", "/index.html" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/index.html" }, method = RequestMethod.POST)
 	@Transactional
 	public String addUser(
 			@ModelAttribute("projectUser") ProjectUser projectUser,
 			@ModelAttribute Role role, BindingResult result, 
 			Map<String, Object> model) {
 
+		projectUser.setJoinDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		projectUserDao.save(projectUser);
 		projectUser = projectUserDao.findUser(projectUser.getEmail());
 		
@@ -321,7 +324,7 @@ public class ProjectManagementController {
 		return "success";
 	}
 
-	@RequestMapping(value = { "/", "/index.html" }, method = RequestMethod.GET)
+	@RequestMapping(value = {  "/index.html" }, method = RequestMethod.GET)
 	@Transactional
 	public String index(@ModelAttribute("projectUser") ProjectUser projectUser,
 			@ModelAttribute ProjectUser logedInUser, ModelMap model) {

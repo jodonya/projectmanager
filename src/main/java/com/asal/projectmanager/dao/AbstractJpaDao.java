@@ -9,16 +9,25 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.domain.DomainObject;
 import com.asal.projectmanager.web.controller.ProjectManagerSession;
+
 
 public abstract class AbstractJpaDao <T extends DomainObject> {
 	private Class<T> clazz;
 	
 	@PersistenceContext
 	EntityManager entityManager;
+	
+	ProjectManagerSession projectManagerSession;
+	
+	public void setProjectManagerSession(ProjectManagerSession projectManagerSession){
+		this.projectManagerSession = projectManagerSession;
+	}
 	
 	
 	public void setClazz(final Class<T> classToSet){
@@ -41,7 +50,8 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 		//entityManager.persist(entity);
 		entity.setCreated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		entity.setIsactive("Y");
-		entity.setCreatedBy(ProjectManagerSession.getUser());
+		entity.setCreatedBy(projectManagerSession.getUser());
+		//entity.setCreatedBy(ProjectManagerSession.getUser());
 		entityManager.merge(entity);
 		entityManager.flush();
 	}
@@ -49,7 +59,8 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 	@Transactional
 	public void update(final T entity){
 		entity.setUpdated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		entity.setUpdatedBy(ProjectManagerSession.getUser());
+		entity.setUpdatedBy(projectManagerSession.getUser());
+		//entity.setUpdatedBy(ProjectManagerSession.getUser());
 		entityManager.merge(entity);
 	}
 	

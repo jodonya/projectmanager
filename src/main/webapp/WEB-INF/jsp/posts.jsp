@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -35,7 +36,8 @@
 			<div class="span12">
 				<div class="row">
 					<div class="span8">
-						<h1 class="page-header">forum</h1>
+						<h1 class="page-header">julisha forum</h1>
+						<span id="julishamarquee"><marquee>inform!</marquee></span>
 					</div>
 					<div class="span4">
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
@@ -93,6 +95,8 @@
 							<c:forEach items="${forumPostList}" var="forumPost">	
 			         		<li>  
 			         		     <span class="projectwho"><b>${forumPost.createdBy}</b></span>
+			         		     <span>on <fmt:formatDate value="${forumPost.created}" type="both" pattern="dd MMMM yyyy" /></span>
+			         		     <span> at <fmt:formatDate value="${forumPost.created}" type="both" pattern=" h:mm:ss a" /></span>
 			         		     <br/>
 			         		     <br/>
 			            		<span class="projectnormal"><c:out value="${forumPost.name}" /></span><br/>
@@ -104,8 +108,12 @@
 			            		<br/>
 			            		<span>
 			            			<span><b><c:out value="${postComment.createdBy}" /></b></span>
+			            			<span>on <fmt:formatDate value="${postComment.created}" type="both" pattern="dd MMMM yyyy" /></span>
+			            			<span> at <fmt:formatDate value="${postComment.created}" type="both" pattern=" h:mm:ss a" /></span>
+			            			<!-- span>at <c:out value="${postComment.created}" /></span -->
 			            			<br/>
-			            			<span><c:out value="${postComment.name}" /></span>
+			            			<span><c:out value="${postComment.name}" /></span> 
+			            			
 			    
 			            		</span>
 			            		<br/>

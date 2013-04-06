@@ -16,6 +16,25 @@
 </head>
 <body onload='document.f.j_username.focus();'>
 	<div class="container">
+	
+	<div class="row"><br/>
+  			<div class="span12"> <br/>
+  			<div>
+  				<div class="row">
+  					<div class="span8"><h1>julisha</h1></div>
+  					<div class="span4"> <a href="/projectmanager/main">Sign Up</a> </div>
+  				</div>
+  				
+  					
+  				</div>
+  			</div>
+  			<div class="span2"> <br/>
+  				<!-- Login Form place holder -->
+  				
+  				
+  			</div>
+  	</div>
+	
 	<div class="row"><br/>
 	<div class="span4"> <br/>
 	

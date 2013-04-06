@@ -62,3 +62,12 @@ ul.commentRight{
 	list-style: none;
 }
 
+.julisha-header{
+	height: 20px;
+	width: 12px;
+}
+
+#julishamarquee{
+	color: blue;
+	font-size: 20px;
+}
