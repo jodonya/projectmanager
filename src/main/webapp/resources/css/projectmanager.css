@@ -71,3 +71,27 @@ ul.commentRight{
 	color: blue;
 	font-size: 20px;
 }
+
+.notification-count{
+	background: #ef3242;
+	padding: 0 3px;
+	margin-right: -2px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #fff;
+	line-height: 19px!important;
+	min-width: 19px;
+	display: block;
+	position: absolute;
+	height: 19px;
+	text-align: center;
+}
+
+
+.mainPost{
+	font-size: 40px;
+	color: blue;
+	font-weight: bolder;
+	
+}

@@ -11,7 +11,7 @@ import com.asal.projectmanager.domain.ForumPost;
 
 @Service
 @Transactional
-public class ForumPostService implements BaseService<ForumPost> {
+public class ForumPostService  implements BaseService<ForumPost> {
 
 	@Autowired
 	public ForumPostDao forumPostDao;

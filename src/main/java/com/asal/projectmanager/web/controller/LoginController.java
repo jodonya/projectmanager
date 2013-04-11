@@ -83,6 +83,8 @@ public class LoginController {
 		projectManagerSession.setUser(logedInUser);
 		model.addAttribute("logedInUser", logedInUser);
 		
+		logger.info(" I have set the logged in user to "+projectManagerSession.getUser().getFirstName());
+		
 
 		
 		return "redirect:/posts";

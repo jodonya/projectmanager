@@ -1,15 +1,11 @@
 package com.asal.projectmanager.domain;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -53,6 +49,9 @@ public class ProjectUser extends DomainObject {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="role_id")
 	private Role role;
+	
+	@Column(name="profilephotoid")
+	private Long profilePhotoId;
 	
 	@Transient
 	private Boolean isLoggedIn = false;
@@ -110,6 +109,13 @@ public class ProjectUser extends DomainObject {
 	}
 	public void setIsLoggedIn(Boolean isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
+	}
+	
+	public Long getProfilePhotoId() {
+		return profilePhotoId;
+	}
+	public void setProfilePhotoId(Long profilePhotoId) {
+		this.profilePhotoId = profilePhotoId;
 	}
 	@Override
 	public String toString() {

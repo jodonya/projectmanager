@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.domain.DomainObject;
@@ -22,7 +21,7 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 	
 	@PersistenceContext
 	EntityManager entityManager;
-	
+	@Autowired
 	ProjectManagerSession projectManagerSession;
 	
 	public void setProjectManagerSession(ProjectManagerSession projectManagerSession){

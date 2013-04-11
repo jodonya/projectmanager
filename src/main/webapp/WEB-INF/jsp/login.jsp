@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<title>Project Management - ASAL - Login</title>
+	<title>Julisha - Login</title>
 <style>
 .errorblock {
 	color: #ff0000;
@@ -41,7 +41,7 @@
 	</div>
 	<div class="span4"> <br/>
 		<!-- Start of Middle Column -->
-		<h3>Project Manager Login </h3>
+		<h3>Login </h3>
  
 	<c:if test="${not empty error}">
 		<div class="errorblock">

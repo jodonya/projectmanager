@@ -5,7 +5,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>Project Management - ASAL</title>
+<title>julisha</title>
 <link href="/projectmanager/resources/css/bootstrap.css" media="all"
 	rel="stylesheet" type="text/css" />
 <link
@@ -38,13 +38,15 @@
 					<div class="span8">
 						<h1 class="page-header">julisha forum</h1>
 						<span id="julishamarquee"><marquee>inform!</marquee></span>
+						<br/>
+						<span class="notification-count"><span>1</span></span>
 					</div>
 					<div class="span4">
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
 							href="/projectmanager/logout.html">Logout</a> | <a
-							href="/projectmanager/index.html">Home</a> <br /> <br /> <a
-							data-toggle="modal" data-target="#myModal" href="">Add Post</a>
+							href="/projectmanager/index.html">Home</a> <br/>   <a href="/projectmanager/photos">My Photos</a> <br /> <br /> <a
+							data-toggle="modal" data-target="#myModal" class="mainPost" href="">Add Post</a>
 					</div>
 				</div>
 			</div>
@@ -94,12 +96,35 @@
 						<ul class="unstyled">
 							<c:forEach items="${forumPostList}" var="forumPost">	
 			         		<li>  
-			         		     <span class="projectwho"><b>${forumPost.createdBy}</b></span>
-			         		     <span>on <fmt:formatDate value="${forumPost.created}" type="both" pattern="dd MMMM yyyy" /></span>
-			         		     <span> at <fmt:formatDate value="${forumPost.created}" type="both" pattern=" h:mm:ss a" /></span>
+			         		     <span class="projectwho"><!-- img src="${pageContext.request.contextPath}/resources/images/defaultphoto.jpg"></img -->
+			         		    	<span style="float: left;">
+			         		    	
+			         		    	 <c:choose>
+								    <c:when test="${empty forumPost.createdBy.profilePhotoId}">
+								    
+								    	<img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img>
+								        
+								    </c:when>
+								    <c:otherwise>
+								      <img src="${pageContext.request.contextPath}/photothumbnail/${forumPost.createdBy.profilePhotoId}" />
+								    </c:otherwise>
+								</c:choose>
+			         		    	<!--  img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img  -->
+			         		    	<!--  img src="${pageContext.request.contextPath}/photothumbnail/1081344" /  -->
+			         		    	</span>
+			         		     <span>
+			         		     		<b>${forumPost.createdBy}</b>
+			         		     		 on <fmt:formatDate value="${forumPost.created}" type="both" pattern="dd MMMM yyyy" />
+			         		     	at <fmt:formatDate value="${forumPost.created}" type="both" pattern=" h:mm:ss a" />
+			         		     	<br/>
+			         		     	<span><c:out value="${forumPost.name}" /></span>
+			         		     </span>
+			         		     <span> </span>
+			         		     </span>
+			         		     
 			         		     <br/>
 			         		     <br/>
-			            		<span class="projectnormal"><c:out value="${forumPost.name}" /></span><br/>
+			            		<span class="projectnormal"></span><br/>
 			            		<br/>
 			            		<br/>
 			            		
@@ -107,17 +132,33 @@
 			            		<c:forEach items="${forumPost.listComments}" var="postComment">
 			            		<br/>
 			            		<span>
+			            		
+			            			<span style="float:left;">
+			            			 <c:choose>
+								    <c:when test="${empty postComment.createdBy.profilePhotoId}">
+								    
+								    	<img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img>
+								        
+								    </c:when>
+								    <c:otherwise>
+								      <img src="${pageContext.request.contextPath}/photothumbnail/${postComment.createdBy.profilePhotoId}" />
+								    </c:otherwise>
+									</c:choose>
+			            			<!--  img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img -->
+			            			
+			            			</span>
+			            			
+			            			<span>
 			            			<span><b><c:out value="${postComment.createdBy}" /></b></span>
 			            			<span>on <fmt:formatDate value="${postComment.created}" type="both" pattern="dd MMMM yyyy" /></span>
 			            			<span> at <fmt:formatDate value="${postComment.created}" type="both" pattern=" h:mm:ss a" /></span>
 			            			<!-- span>at <c:out value="${postComment.created}" /></span -->
 			            			<br/>
 			            			<span><c:out value="${postComment.name}" /></span> 
-			            			
+			            			</span>
 			    
 			            		</span>
 			            		<br/>
-			            		
 			            		</c:forEach>
 						
 								</c:if>
