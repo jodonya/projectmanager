@@ -1,5 +1,6 @@
 package com.asal.projectmanager.domain;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +25,7 @@ public class PostComment extends DomainObject {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="forumpost_id")
 	private ForumPost forumPost;
 	
@@ -32,6 +33,7 @@ public class PostComment extends DomainObject {
 	@JoinColumn(name="postcomment_id")
 	private PostComment parentComment;
 	
+	@Column(length=50000)
 	private String name;
 	private Long upcount;
 	private Long downcount;
@@ -84,7 +86,15 @@ public class PostComment extends DomainObject {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		
 		PostComment other = (PostComment) obj;
+		
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+
 		if (name == null) {
 			if (other.name != null)
 				return false;

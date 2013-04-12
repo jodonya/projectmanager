@@ -2,6 +2,7 @@ package com.asal.projectmanager.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,6 +32,8 @@ public class ForumPost extends DomainObject {
 	@JoinColumn(name="forum_id")
 	
 	private Forum forum;
+	
+	@Column(length=50000)
 	private String name;
 	private Long upcount;
 	private Long downcount;
@@ -91,6 +94,12 @@ public class ForumPost extends DomainObject {
 		if (getClass() != obj.getClass())
 			return false;
 		ForumPost other = (ForumPost) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+
 		if (name == null) {
 			if (other.name != null)
 				return false;

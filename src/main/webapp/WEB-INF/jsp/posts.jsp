@@ -45,7 +45,7 @@
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
 							href="/projectmanager/logout.html">Logout</a> | <a
-							href="/projectmanager/index.html">Home</a> <br/>   <a href="/projectmanager/photos">My Photos</a> <br /> <br /> <a
+							href="${pageContext.request.contextPath}/posts">Home</a> <br/>   <a href="${pageContext.request.contextPath}/photos">My Photos</a> <br /> <br /> <a
 							data-toggle="modal" data-target="#myModal" class="mainPost" href="">Add Post</a>
 					</div>
 				</div>

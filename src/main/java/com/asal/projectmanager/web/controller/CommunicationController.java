@@ -16,6 +16,7 @@ import com.asal.projectmanager.dao.ForumPostDao;
 import com.asal.projectmanager.dao.PostCommentDao;
 import com.asal.projectmanager.domain.ForumPost;
 import com.asal.projectmanager.domain.PostComment;
+import com.asal.projectmanager.service.NotifierService;
 
 @Controller
 @Scope("session")
@@ -29,6 +30,9 @@ public class CommunicationController {
 	
 	@Autowired
 	PostCommentDao postCommentDao;
+	
+	@Autowired
+	NotifierService notifierService;
 
 	@RequestMapping(value = "/posts", method = RequestMethod.GET)
 	@Transactional
@@ -63,8 +67,13 @@ public class CommunicationController {
 		
 		ForumPost post = forumPostDao.findOne(postId);
 		postComment.setForumPost(post);
-		postCommentDao.save(postComment);
 		
+		//postCommentDao.save(postComment);
+		Long commentId = postCommentDao.saveReturnId(postComment);
+		postComment = postCommentDao.findOne(commentId);
+		
+		//Sending notifications - this will have to be made asynchronous
+		notifierService.sendNotification(commentId);
 		
 		forumPost = new ForumPost();
 		postComment = new PostComment();

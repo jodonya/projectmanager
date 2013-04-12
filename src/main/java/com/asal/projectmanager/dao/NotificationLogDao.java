@@ -2,23 +2,22 @@ package com.asal.projectmanager.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.asal.projectmanager.domain.Notification;
-import com.asal.projectmanager.domain.PostComment;
+import com.asal.projectmanager.domain.NotificationLog;
 import com.asal.projectmanager.web.controller.ProjectManagerSession;
 
 @Repository
-public class NotificationDao extends AbstractJpaDao<Notification> {
+public class NotificationLogDao extends AbstractJpaDao<NotificationLog> {
+	
 	
 	@Autowired
 	ProjectManagerSession projectManagerSession;
 	
-	public NotificationDao(){
-		setClazz(Notification.class);
+	public NotificationLogDao()
+	{
+		setClazz(NotificationLog.class);
 		setProjectManagerSession(projectManagerSession);
 	}
-	
 	
 
 }

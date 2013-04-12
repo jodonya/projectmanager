@@ -24,6 +24,8 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 	@Autowired
 	ProjectManagerSession projectManagerSession;
 	
+	
+	
 	public void setProjectManagerSession(ProjectManagerSession projectManagerSession){
 		this.projectManagerSession = projectManagerSession;
 	}
@@ -55,6 +57,21 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 		entityManager.flush();
 	}
 	
+	//@Transactional
+	public Long saveReturnId(final T entity){
+		//entityManager.persist(entity);
+		entity.setCreated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		entity.setIsactive("Y");
+		entity.setCreatedBy(projectManagerSession.getUser());
+		//entity.setCreatedBy(ProjectManagerSession.getUser());
+		
+		entityManager.persist(entity);
+		entityManager.flush();
+//		entityManager.getTransaction().commit();
+		//entityManager.
+		return entity.getId();
+	}
+	
 	@Transactional
 	public void update(final T entity){
 		entity.setUpdated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -62,6 +79,8 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 		//entity.setUpdatedBy(ProjectManagerSession.getUser());
 		entityManager.merge(entity);
 	}
+	
+	
 	
 	@Transactional
 	public void delete(final T entity){

@@ -45,7 +45,7 @@
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
 							href="/projectmanager/logout.html">Logout</a> | <a
-							href="/projectmanager/index.html">Home</a> <br /> <br />
+							href="${pageContext.request.contextPath}/posts">Home</a> <br /> <br />
 					</div>
 				</div>
 			</div>
