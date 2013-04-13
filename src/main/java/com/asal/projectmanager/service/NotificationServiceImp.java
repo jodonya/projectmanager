@@ -38,4 +38,9 @@ public class NotificationServiceImp implements NotificationService {
 	public Long addSaveReturn(Notification notification) {
 		return notificationDao.saveReturnId(notification);
 	}
+
+	public Notification addSaveReturnEntity(Notification notification) {
+		// TODO Auto-generated method stub
+		return notificationDao.saveReturnEntity(notification);
+	}
 }

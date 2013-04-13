@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.domain.ForumPost;
-import com.asal.projectmanager.domain.Photo;
 import com.asal.projectmanager.domain.PostComment;
 import com.asal.projectmanager.web.controller.ProjectManagerSession;
 

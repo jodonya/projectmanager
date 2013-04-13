@@ -3,6 +3,7 @@ package com.asal.projectmanager.web.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,13 @@ import com.asal.projectmanager.dao.PostCommentDao;
 import com.asal.projectmanager.domain.ForumPost;
 import com.asal.projectmanager.domain.PostComment;
 import com.asal.projectmanager.service.NotifierService;
+import com.asal.projectmanager.service.async.CalledBack;
 
 @Controller
 @Scope("session")
 public class CommunicationController {
 
+	protected static Logger logger = Logger.getLogger(CommunicationController.class);
 	@Autowired
 	ProjectManagerSession projectManagerSession;
 
@@ -33,6 +36,8 @@ public class CommunicationController {
 	
 	@Autowired
 	NotifierService notifierService;
+	@Autowired
+	CalledBack calledBack;
 
 	@RequestMapping(value = "/posts", method = RequestMethod.GET)
 	@Transactional
@@ -72,8 +77,16 @@ public class CommunicationController {
 		Long commentId = postCommentDao.saveReturnId(postComment);
 		postComment = postCommentDao.findOne(commentId);
 		
+		logger.info(" DRAMA - AND COMMENT IS BEFORE WE START "+postComment);
+		
 		//Sending notifications - this will have to be made asynchronous
-		notifierService.sendNotification(commentId);
+		//notifierService.sendNotification(commentId);
+		calledBack.setPostComment(postComment);
+		calledBack.setUser(postComment.getCreatedBy());
+		calledBack.setNotifierService(notifierService);
+		calledBack.andAction();
+		
+		//Left the notifications to deal with themselves
 		
 		forumPost = new ForumPost();
 		postComment = new PostComment();

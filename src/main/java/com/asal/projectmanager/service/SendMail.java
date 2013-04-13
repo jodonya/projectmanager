@@ -1,4 +1,4 @@
-package com.asal.projectmanager.web.controller;
+package com.asal.projectmanager.service;
 
 import java.util.Properties;
 
@@ -11,6 +11,11 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+@Service
+@Scope("prototype")
 public class SendMail {
 	
 	public  SendMail(){

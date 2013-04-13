@@ -37,7 +37,11 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 
 	@Transactional
 	public T findOne(final Long id){
-		return entityManager.find(clazz, id);
+		
+		T entity = entityManager.find(clazz, id);
+		entityManager.flush();
+		entityManager.refresh(entity);
+		return entity;//entityManager.find(clazz, id);
 	}
 	
 	@Transactional
@@ -70,6 +74,20 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 //		entityManager.getTransaction().commit();
 		//entityManager.
 		return entity.getId();
+	}
+	
+	public T saveReturnEntity(final T entity){
+		//entityManager.persist(entity);
+		entity.setCreated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		entity.setIsactive("Y");
+		entity.setCreatedBy(projectManagerSession.getUser());
+		//entity.setCreatedBy(ProjectManagerSession.getUser());
+		
+		entityManager.persist(entity);
+		entityManager.flush();
+//		entityManager.getTransaction().commit();
+		//entityManager.
+		return entity;
 	}
 	
 	@Transactional

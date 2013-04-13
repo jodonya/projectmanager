@@ -13,6 +13,9 @@ public interface NotificationService extends BaseService<Notification> {
 	
 	public Long addSaveReturn(Notification notification) ;
 
+	public Notification addSaveReturnEntity(Notification notification) ;
+
+	
 	public void delete(Notification notification) ;
 
 	public Notification findOne(Long id) ;

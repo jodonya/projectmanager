@@ -20,13 +20,22 @@ public class CalledBack implements CallbackInterface{
         ExecutorService es = Executors.newFixedThreadPool(3);
         CallingBackWorker worker ;
         
-        for(int i=0; i<numberOfJobs;i++){
-        	worker = new CallingBackWorker();
-        	 worker.setEmployer(this);
-            // final Future future =  I guess we dont need a Future since we are using a callable;
-               es.submit( worker);
-        }
+        //Get the list of users
+//        String message = "";
+//        for(int i=0; i<numberOfJobs;i++){
+//        	worker = new CallingBackWorker(message);
+//        	 worker.setEmployer(this);
+//            // final Future future =  I guess we dont need a Future since we are using a callable;
+//               es.submit( worker);
+//        }
 
+        
+      String message = "";
+      	worker = new CallingBackWorker(message);
+      	 worker.setEmployer(this);
+          // final Future future =  I guess we dont need a Future since we are using a callable;
+             es.submit( worker);
+ 
        
        
         System.out.println("... try to do something while the work is being done....");

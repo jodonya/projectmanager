@@ -28,7 +28,7 @@ public class NotificationLog extends DomainObject {
 	
 	@Column(length=1000)
 	private String message;
-
+	
 	public Notification getNotification() {
 		return notification;
 	}

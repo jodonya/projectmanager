@@ -34,8 +34,12 @@ public class Notification extends DomainObject {
 	@Column(length = 1000)
 	private String message;
 
-	@Column(name = "issent")
+	@Column(name = "issent", columnDefinition = "boolean default false", nullable = true)
 	private Boolean isSent;
+	
+	@Column(name="notificationseen", columnDefinition = "boolean default false", nullable = true)
+	private Boolean notificationSeen;
+
 
 	@Column(name = "whensent")
 	private Timestamp whenSent;

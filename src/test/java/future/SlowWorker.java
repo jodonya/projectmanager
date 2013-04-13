@@ -14,6 +14,8 @@ public class SlowWorker {
         try {
             System.out.println("==== working, working, working ====== (Worker Id = "
                                + this.id+")");
+            //Sending Notifications
+            
             Thread.sleep(2000);
             System.out.println("==== ready! ======");
         } catch (InterruptedException e) {

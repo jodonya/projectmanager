@@ -5,7 +5,7 @@ import java.util.concurrent.Callable;
 public class CallingBackWorker implements Callable<Object> {
     private CallbackInterface employer;
     
-    public CallingBackWorker() {
+    public CallingBackWorker(String message) {
     }
 
     public Object call() {
