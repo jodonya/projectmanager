@@ -49,6 +49,9 @@ public class LoginController {
 	@Autowired
 	UserRoleDao userRoleDao;
 	
+	@Autowired
+	SessionCounter sessionCounter;
+	
 	
 	@RequestMapping(value="/welcome", method = RequestMethod.GET)
 	@Transactional
@@ -58,8 +61,8 @@ public class LoginController {
 		
 		
 		String name = principal.getName();
-		model.addAttribute("username", name);
-		model.addAttribute("message", "Spring Security Custom Form example");
+		//model.addAttribute("username", name);
+		//model.addAttribute("message", "Spring Security Custom Form example");
 		
 		List<ProjectUser> projectUserList = projectUserDao.findAll();
 		model.put("projectUserList", projectUserList);
@@ -76,12 +79,16 @@ public class LoginController {
 		
 		ProjectUser logedInUser = projectUserDao.findUser(name);
 		
+		sessionCounter.getUsersOnline().add(logedInUser);
+		
 //		if (logedInUser == null)
 //			return "login";
 //		
 //		logedInUser.setIsLoggedIn(true);
 		projectManagerSession.setUser(logedInUser);
 		model.addAttribute("logedInUser", logedInUser);
+		
+		
 		
 		logger.info(" I have set the logged in user to "+projectManagerSession.getUser().getFirstName());
 		
@@ -98,8 +105,8 @@ public class LoginController {
 		logger.info("XXXXXXXXXXXXXXXXX Entering Welcome POST !");
 
 		String name = principal.getName();
-		model.addAttribute("username", name);
-		model.addAttribute("message", "Spring Security Custom Form example");
+		//model.addAttribute("username", name);
+		//model.addAttribute("message", "Spring Security Custom Form example");
 		
 		List<ProjectUser> projectUserList = projectUserDao.findAll();
 		model.put("projectUserList", projectUserList);
@@ -136,7 +143,7 @@ public class LoginController {
  
 	}
 	
-	@RequestMapping(value={"/","/main"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/main"}, method = RequestMethod.GET)
 	public String main(@ModelAttribute("projectUser") ProjectUser projectUser, ModelMap model) {
 		logger.info("XXXXXXXXXXXXXXXXX Main Page !");
 
@@ -144,7 +151,7 @@ public class LoginController {
  
 	}
 	
-	@RequestMapping(value={"/","/main"}, method = RequestMethod.POST)
+	@RequestMapping(value={"/main"}, method = RequestMethod.POST)
 	public String signUp(@ModelAttribute("projectUser") ProjectUser projectUser, ModelMap model) {
 		logger.info("XXXXXXXXXXXXXXXXX Sign Up !");
 		

@@ -5,30 +5,43 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>julisha</title>
-<link href="/projectmanager/resources/css/bootstrap.css" media="all"
+<title>Tujulishe</title>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all"
 	rel="stylesheet" type="text/css" />
 <link
-	href="/projectmanager/resources/datepicker/css/bootstrap-responsive.css"
+	href="${pageContext.request.contextPath}/resources/datepicker/css/bootstrap-responsive.css"
 	media="all" rel="stylesheet" type="text/css" />
-<link href="/projectmanager/resources/datepicker/css/datepicker.css"
+<link href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css"
 	media="all" rel="stylesheet" type="text/css" />
-<link href="/projectmanager/resources/css/projectmanager.css"
+<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css"
 	media="all" rel="stylesheet" type="text/css" />
 
 <!--  link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" -->
-<link rel="stylesheet" type="text/css" media="screen"
-	href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+<!-- link rel="stylesheet" type="text/css" media="screen"
+	href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css" -->
 
 <script type="text/javascript"
-	src="/projectmanager/resources/js/jquery-1.9.0.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.9.0.js"></script>
 <script type="text/javascript"
-	src="/projectmanager/resources/js/projectmanager.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-modal.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.atmosphere.js"></script>
 <script type="text/javascript"
-	src="/projectmanager/resources/js/bootstrap-modal.js"></script>
-
+	src="${pageContext.request.contextPath}/resources/js/projectmanager.js"></script>
 </head>
 <body>
+	<script  type="text/javascript"></script>
+	<script  type="text/javascript">
+	
+	var contextPath = "http://localhost:8080/";
+		
+		/***
+		
+		"'${request.getContextPath()}';
+	***/
+	
+	console.log(' ######### The Context Path is : ', contextPath);
+	console.log(' ######### The Context Path is : ', contextPath);
+	</script>
 
 	<div class="container">
 		<div class="row">
@@ -36,7 +49,7 @@
 			<div class="span12">
 				<div class="row">
 					<div class="span8">
-						<h1 class="page-header">julisha forum</h1>
+						<h1 class="page-header">Tujulishe Forum</h1>
 						<span id="julishamarquee"><marquee>inform!</marquee></span>
 						<br/>
 						<span class="notification-count"><span>1</span></span>
@@ -44,8 +57,8 @@
 					<div class="span4">
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
-							href="/projectmanager/logout.html">Logout</a> | <a
-							href="${pageContext.request.contextPath}/posts">Home</a> <br/>   <a href="${pageContext.request.contextPath}/photos">My Photos</a> <br /> <br /> <a
+							href="${pageContext.request.contextPath}/logout.html">Logout</a> | <a
+							href="${pageContext.request.contextPath}/posts">Home</a> <br/>   <a href="${pageContext.request.contextPath}/photos">My Photos</a> | <span> <c:out value="${totalUsers}"></c:out> members <span class="blink">online</span></span> <br /> <br /> <a
 							data-toggle="modal" data-target="#myModal" class="mainPost" href="">Add Post</a>
 					</div>
 				</div>
@@ -206,15 +219,78 @@
 			</div>
 			<div class="span3">
 				<br />
-
+				<div>
+					<c:if test="${totalUsers == 0}">
+						<span>There is no one online ... </span>
+					</c:if>
+					<c:if test="${totalUsers > 0}">
+						<h3>Users Online</h3>
+					</c:if>
+					
+					<c:forEach items="${usersonline}" var="user">
+							
+							<c:choose>
+						    <c:when test="${user.equals(myself)}">
+						       <!-- Do nothing, it is me, you can't show me to me that I am online -->
+						    </c:when>
+						    <c:otherwise>
+						       <!-- Display this guy so that I can know he is online   -->
+						       
+						       <!-- Start Show this guy -->
+						       	<br/>
+			            		<span>
+			            		<span>
+									<c:choose>
+								    <c:when test="${empty user.profilePhotoId}">
+								    
+								    	<img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img>
+								        
+								    </c:when>
+								    <c:otherwise>
+								      <img src="${pageContext.request.contextPath}/photothumbnail/${user.profilePhotoId}" />
+								    </c:otherwise>
+									</c:choose>			            	
+									
+									</span>
+					            	<span><c:out value="${user}" /> </span><span  class="chatonline">chat</span>
+			            	 
+			            	 </span>
+			            	  <br/>
+							  <hr/>
+			            	 
+						       <!-- End Show this guy -->
+						    </c:otherwise>
+							</c:choose>
+			         </c:forEach>
+					<!--  span><span><img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img></span><span>Jack Baur </span> <span  class="chatonline">chat</span></span>
+					<br/>
+					<hr/>
+					<span><span><img src="${pageContext.request.contextPath}/resources/images/thumbnaildefaultphoto.jpg"></img></span><span>Noah Khaemba</span> <span class="chatonline">chat</span></span>
+					<br/>
+					<hr/ -->
+					
+				</div>
+				<br/>
+				
+				
+				<!-- Start Chat -->
+				<div id="chatcontainer">
+					<div id="chatheader"><span id="chatheaderusername"><h4>Atmosphere Chat.</h4></span><span id="chatclose"><img src="${pageContext.request.contextPath}/resources/images/close.jpg"></img></span></div>
+					<div id="chatcontent"></div>
+					<div id="chatbox">
+					    <span id="chatstatus">Connecting...</span>
+					    <input type="text" id="chatinput" disabled="disabled"/>
+					</div>
+				</div>
+				<!-- End Chat -->
 
 			</div>
 		</div>
 
 	</div>
 	<!-- Le javascript -->
-	<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
-	<script src="resources/datepicker/js/bootstrap-datepicker.js"></script>
+	<!--  script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datepicker/js/bootstrap-datepicker.js"></script>
 	<script>
 		/* Update datepicker plugin so that MM/DD/YYYY format is used. */
 		$.extend($.fn.datepicker.defaults, {
@@ -239,6 +315,6 @@
 				return month + "/" + dom + "/" + date.getFullYear();
 			}
 		});
-	</script>
+	</script -->	
 </body>
 </html>

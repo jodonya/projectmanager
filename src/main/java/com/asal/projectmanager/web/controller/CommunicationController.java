@@ -3,8 +3,13 @@ package com.asal.projectmanager.web.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
+import org.hibernate.validator.internal.metadata.provider.ProgrammaticMetaDataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +24,7 @@ import com.asal.projectmanager.domain.ForumPost;
 import com.asal.projectmanager.domain.PostComment;
 import com.asal.projectmanager.service.NotifierService;
 import com.asal.projectmanager.service.async.CalledBack;
+import com.asal.projectmanager.web.paging.PageNavigator;
 
 @Controller
 @Scope("session")
@@ -34,22 +40,52 @@ public class CommunicationController {
 	@Autowired
 	PostCommentDao postCommentDao;
 	
+	   @Value("5")
+	    private int pageSize;
+
+	    @Value("2")
+	    private int pageNavTrail;
+
+	  
+	 @Autowired
+	 private PageNavigator pageNavigator;
+	
 	@Autowired
 	NotifierService notifierService;
 	@Autowired
 	CalledBack calledBack;
+	
+	@Autowired
+	SessionCounter sessionCounter;
 
-	@RequestMapping(value = "/posts", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/posts"}, method = RequestMethod.GET)
+	//@RequestMapping(value = {"/posts"}, method = RequestMethod.GET)
 	@Transactional
 	public String showPosts(@ModelAttribute("forumPost") ForumPost forumPost, @ModelAttribute("postComment") PostComment postComment,
-			Map<String, Object> model) {
-
+			Map<String, Object> model, HttpSession session) {
+		
+//		PagedListHolder<ForumPost> forumPostList = new PagedListHolder<ForumPost>(forumPostDao.findAll());
+//		forumPostList.setPage(5);
+		
+		SessionCounter counter = (SessionCounter) session.getAttribute("counter");
+		
+		
+		Integer totalUsers = counter.getActiveSessionNumber();
+		
+		totalUsers = totalUsers - 1;
 		List<ForumPost> forumPostList = forumPostDao.findAll();
 		model.put("forumPostList", forumPostList);
+		model.put("totalUsers", totalUsers);
+		model.put("usersonline", sessionCounter.getUsersOnline());
+		model.put("myself", projectManagerSession.getUser());
+		
+		logger.info(" PPPPPPPPPPPPPPPPPPPPPPP The number of users is PPPPPPPPPPPPPPPPPPPPP  "+sessionCounter.getUsersOnline().size());
+		
 		return "posts";
 	}
 
-	@RequestMapping(value = "/posts", method = RequestMethod.POST)
+	@RequestMapping(value = {"/","/posts"}, method = RequestMethod.POST)
+	//@RequestMapping(value = {"/posts"}, method = RequestMethod.POST)
 	@Transactional
 	public String addPost(@ModelAttribute("forumPost") ForumPost forumPost, @ModelAttribute("postComment") PostComment postComment,
 			Map<String, Object> model) {
@@ -100,4 +136,12 @@ public class CommunicationController {
 		
 		return "redirect:/posts";
 	}
+	
+	
+	//@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	//@Transactional
+	public String chat(Map<String, Object> model) {
+		return "mychat";
+	}
+
 }

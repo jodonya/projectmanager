@@ -48,5 +48,16 @@ public class PostCommentDao extends AbstractJpaDao<PostComment> {
 
 		return (List<PostComment>)q.getResultList();
 	}
+	
+	   @SuppressWarnings("unchecked")
+	    public List<PostComment> getByPage(ForumPost forumPost, int page, int pageSize) {
+	        int firstResult = page * pageSize - pageSize;
+
+	        return listByPage(forumPost, PostComment.class, firstResult, pageSize);
+	    }
+
+	    public Long countAll(ForumPost forumPost) {
+	        return countAll(forumPost, PostComment.class);
+	    }
 
 }

@@ -3,9 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-	<title>Project Management - ASAL</title>
-	<link href="resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
+	<title>Tujulishe</title>
+	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -15,8 +15,8 @@
   			<div class="span12"> <br/>
   			<div>
   				<div class="row">
-  					<div class="span8"><h1>julisha</h1></div>
-  					<div class="span4"> <a href="/projectmanager/login">Sign In</a> </div>
+  					<div class="span8"><h1>Tujulishe</h1></div>
+  					<div class="span4"> <a href="${pageContext.request.contextPath}/login">Sign In</a> </div>
   				</div>
   				
   					
@@ -32,7 +32,7 @@
    
     <div class="row"><br/>
     	<div class="span8"> <br/>
-    		<h1>welcome to julisha</h1> <br/>
+    		<h1>welcome to Tujulishe</h1> <br/>
     		<span>Connect, communicate, keep in touch.</span>
     	</div>
     	

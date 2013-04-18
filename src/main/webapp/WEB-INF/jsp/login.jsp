@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<title>Julisha - Login</title>
+	<title>Tujulishe - Login</title>
 <style>
 .errorblock {
 	color: #ff0000;
@@ -11,8 +11,8 @@
 	margin: 16px;
 }
 </style>
-	<link href="resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 <body onload='document.f.j_username.focus();'>
 	<div class="container">
@@ -21,7 +21,7 @@
   			<div class="span12"> <br/>
   			<div>
   				<div class="row">
-  					<div class="span8"><h1>julisha</h1></div>
+  					<div class="span8"><h1>Tujulishe</h1></div>
   					<div class="span4"> <a href="/projectmanager/main">Sign Up</a> </div>
   				</div>
   				

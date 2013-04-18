@@ -4,8 +4,8 @@
 <html>
 <head>
 	<title>Project Management - ASAL - Setup</title>
-	<link href="resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 

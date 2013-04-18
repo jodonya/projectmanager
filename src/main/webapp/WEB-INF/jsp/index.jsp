@@ -3,9 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-	<title>Project Management - ASAL</title>
-	<link href="resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
+	<title>Tujulishe</title>
+	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -16,7 +16,7 @@
   			<div>
   				<div class="row">
   					<div class="span8"><h1 class="page-header">ASAL Project Management</h1></div>
-  					<div class="span4"><span>Welcome <c:out value="${logedInUser.firstName}"></c:out>  <c:out value="${logedInUser.lastName}"></c:out></span> |<a href="/projectmanager/posts">Forum</a>| <a href="/projectmanager/logout.html">Logout</a> </div>
+  					<div class="span4"><span>Welcome <c:out value="${logedInUser.firstName}"></c:out>  <c:out value="${logedInUser.lastName}"></c:out></span> |<a href="${pageContext.request.contextPath}/posts">Forum</a>| <a href="${pageContext.request.contextPath}/logout.html">Logout</a> </div>
   				</div>
   				
   					
@@ -37,9 +37,9 @@
     		<p>
     			<!--  a href="/projectmanager/addgreeting.html">Add Project</a>|
 				<a href="/projectmanager/greetings.html">Show all Projects</a>|  -->
-				<a href="/projectmanager/project.html">Add Project</a>|
-				<a href="/projectmanager/posts">Forum</a>|
-				<a href="/projectmanager/setup.html">Setup</a> 
+				<a href="${pageContext.request.contextPath}/project.html">Add Project</a>|
+				<a href="${pageContext.request.contextPath}/posts">Forum</a>|
+				<a href="${pageContext.request.contextPath}/setup.html">Setup</a> 
 			</p>
 			
 			

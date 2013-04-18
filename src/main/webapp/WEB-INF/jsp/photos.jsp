@@ -5,15 +5,15 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>Project Management - ASAL</title>
-<link href="/projectmanager/resources/css/bootstrap.css" media="all"
+<title>Tujulishe</title>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all"
 	rel="stylesheet" type="text/css" />
 <link
-	href="/projectmanager/resources/datepicker/css/bootstrap-responsive.css"
+	href="${pageContext.request.contextPath}/resources/datepicker/css/bootstrap-responsive.css"
 	media="all" rel="stylesheet" type="text/css" />
-<link href="/projectmanager/resources/datepicker/css/datepicker.css"
+<link href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css"
 	media="all" rel="stylesheet" type="text/css" />
-<link href="/projectmanager/resources/css/projectmanager.css"
+<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css"
 	media="all" rel="stylesheet" type="text/css" />
 
 <!--  link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" -->
@@ -21,11 +21,11 @@
 	href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 
 <script type="text/javascript"
-	src="/projectmanager/resources/js/jquery-1.9.0.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.9.0.js"></script>
 <script type="text/javascript"
-	src="/projectmanager/resources/js/projectmanager.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/projectmanager.js"></script>
 <script type="text/javascript"
-	src="/projectmanager/resources/js/bootstrap-modal.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-modal.js"></script>
 
 </head>
 <body>
@@ -36,7 +36,7 @@
 			<div class="span12">
 				<div class="row">
 					<div class="span8">
-						<h1 class="page-header">julisha forum</h1>
+						<h1 class="page-header">Tujulishe Forum</h1>
 						<span id="julishamarquee"><marquee>inform!</marquee></span>
 						<br/>
 						<span class="notification-count"><span>1</span></span>
@@ -44,7 +44,7 @@
 					<div class="span4">
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
-							href="/projectmanager/logout.html">Logout</a> | <a
+							href="${pageContext.request.contextPath}/logout.html">Logout</a> | <a
 							href="${pageContext.request.contextPath}/posts">Home</a> <br /> <br />
 					</div>
 				</div>
@@ -180,7 +180,7 @@
 	</div>
 	<!-- Le javascript -->
 	<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
-	<script src="resources/datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datepicker/js/bootstrap-datepicker.js"></script>
 	<script>
 		/* Update datepicker plugin so that MM/DD/YYYY format is used. */
 		$.extend($.fn.datepicker.defaults, {

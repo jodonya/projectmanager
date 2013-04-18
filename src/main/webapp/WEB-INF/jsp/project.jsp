@@ -4,10 +4,10 @@
 <html>
 <head>
 	<title>Project Management - ASAL</title>
-	<link href="/projectmanager/resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="/projectmanager/resources/datepicker/css/bootstrap-responsive.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="/projectmanager/resources/datepicker/css/datepicker.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="/projectmanager/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/datepicker/css/bootstrap-responsive.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/resources/css/projectmanager.css" media="all" rel="stylesheet" type="text/css"/>
 	
     
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -32,7 +32,7 @@
 			<div>
 	
   
-  	<form:form class="form-horizontal" action="/projectmanager/project.html" modelAttribute="project"> 
+  	<form:form class="form-horizontal" action="project.html" modelAttribute="project"> 
      <!--  form class="form-horizontal-->  
         <fieldset>  
           <legend>Add Project</legend> 

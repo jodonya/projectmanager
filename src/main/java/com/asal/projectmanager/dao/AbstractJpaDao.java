@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.domain.DomainObject;
+import com.asal.projectmanager.domain.ForumPost;
 import com.asal.projectmanager.web.controller.ProjectManagerSession;
 
 
@@ -120,4 +122,33 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 		//cq.where(/*your stuff*/);
 		return entityManager.createQuery(cq).getSingleResult();
 	}
+	
+	 protected List<T> listByPage(ForumPost forumPost, Class<T> clazz, int firstResult, int maxResult) {
+	        String strQry = "from " + clazz.getName() + " c WHERE c.forumPost = :forumPost order by c.id desc";
+
+	        Query query = entityManager.createQuery(strQry);
+	        		//this.sessionFactory.getCurrentSession().createQuery(strQry);
+			query.setParameter("forumPost", forumPost);
+	        query.setFirstResult(firstResult);
+	        query.setMaxResults(maxResult);
+
+	        return query.getResultList();
+	    }
+
+	    protected Long countAll(ForumPost forumPost, Class<T> clazz) {
+	       // Long entity = null;
+	        List<Long> entityList = null;
+	        String strQry = "select count(id) from " + clazz.getName()+ " c WHERE c.forumPost = :forumPost ";
+	       
+	        Query query = entityManager.createQuery(strQry);
+	        query.setParameter("forumPost", forumPost);
+	        
+	        entityList = query.getResultList();
+
+	        Long count = 0L;
+	        
+	        if (entityList != null)
+	        	count = entityList.get(0);
+	        return count;
+	    }
 }
