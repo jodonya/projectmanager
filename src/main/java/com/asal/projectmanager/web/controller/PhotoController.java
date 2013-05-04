@@ -53,7 +53,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.media.jai.codec.SeekableStream;
 
 @Controller
-@Scope("session")
+//@Scope("session")
 @ComponentScan("com.asal.projectmanager.dao")
 public class PhotoController {
 

@@ -18,7 +18,7 @@ import com.asal.projectmanager.domain.ProjectUser;
 public class SessionCounter implements HttpSessionListener {
 
 	List<String> sessions = new ArrayList<String>();
-	private Set<ProjectUser> usersOnline = new HashSet<ProjectUser>();
+	private static final Set<ProjectUser> usersOnline = new HashSet<ProjectUser>();
 	
 	protected Logger logger = Logger.getLogger(SessionCounter.class);
 	
@@ -33,6 +33,8 @@ public class SessionCounter implements HttpSessionListener {
 		
 		HttpSession session = event.getSession();
 		sessions.add(session.getId());
+		logger.info("GGGGGGGGGGGGGGg The New session   is "+session.getId());
+
 		
 		//ProjectUser loggedInUser = (ProjectUser) session.getAttribute("loggedInUser");
 		//usersOnline.add(projectManagerSession.getUser());
@@ -43,6 +45,17 @@ public class SessionCounter implements HttpSessionListener {
 
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession session = event.getSession();
+		ProjectUser userToRemove = null;
+		//Get the User with the given session id
+		for (ProjectUser user : usersOnline) {
+			if(user.getSessionId().equals(session.getId())){
+				userToRemove = user;
+			}
+		}
+		
+		//Finally Remove the user found in the online list - the guy that is logging out
+		usersOnline.remove(userToRemove);
+		logger.info("RRRRRRRRRRRR Removed "+session.getId());
 		sessions.remove(session.getId());
 		session.setAttribute("counter", this);
 
@@ -56,8 +69,8 @@ public class SessionCounter implements HttpSessionListener {
 		return usersOnline;
 	}
 
-	public void setUsersOnline(Set<ProjectUser> usersOnline) {
-		this.usersOnline = usersOnline;
+	public void addUserOnline(ProjectUser user) {
+		this.usersOnline.add(user);
 	}
 	
 	

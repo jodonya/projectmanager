@@ -55,6 +55,10 @@ public class ProjectUser extends DomainObject {
 	
 	@Transient
 	private Boolean isLoggedIn = false;
+	
+	@Transient
+	private String sessionId;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -116,6 +120,13 @@ public class ProjectUser extends DomainObject {
 	}
 	public void setProfilePhotoId(Long profilePhotoId) {
 		this.profilePhotoId = profilePhotoId;
+	}
+	
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	@Override
 	public String toString() {

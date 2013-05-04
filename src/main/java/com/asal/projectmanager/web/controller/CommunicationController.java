@@ -27,7 +27,7 @@ import com.asal.projectmanager.service.async.CalledBack;
 import com.asal.projectmanager.web.paging.PageNavigator;
 
 @Controller
-@Scope("session")
+//@Scope("session")
 public class CommunicationController {
 
 	protected static Logger logger = Logger.getLogger(CommunicationController.class);
@@ -70,7 +70,7 @@ public class CommunicationController {
 		SessionCounter counter = (SessionCounter) session.getAttribute("counter");
 		
 		
-		Integer totalUsers = counter.getActiveSessionNumber();
+		Integer totalUsers = counter.getUsersOnline().size();//counter.getActiveSessionNumber();
 		
 		totalUsers = totalUsers - 1;
 		List<ForumPost> forumPostList = forumPostDao.findAll();

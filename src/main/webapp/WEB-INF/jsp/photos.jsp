@@ -44,7 +44,7 @@
 					<div class="span4">
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
-							href="${pageContext.request.contextPath}/logout.html">Logout</a> | <a
+							href="${pageContext.request.contextPath}/logout">Logout</a> | <a
 							href="${pageContext.request.contextPath}/posts">Home</a> <br /> <br />
 					</div>
 				</div>

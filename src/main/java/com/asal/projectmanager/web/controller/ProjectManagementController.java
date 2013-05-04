@@ -45,7 +45,7 @@ import com.asal.projectmanager.domain.Task;
 import com.asal.projectmanager.domain.UserRole;
 
 @Controller
-@Scope("session")
+//@Scope("session")
 @SessionAttributes({ "user" })
 // @Secured("ROLE_USER")
 public class ProjectManagementController {

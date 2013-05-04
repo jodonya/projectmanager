@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,7 +31,7 @@ import com.asal.projectmanager.domain.ProjectUser;
 import com.asal.projectmanager.domain.UserRole;
 
 @Controller
-@Scope("request")
+//@Scope("request")
 @SessionAttributes({"logedInUser"})
 public class LoginController {
 	
@@ -55,7 +57,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/welcome", method = RequestMethod.GET)
 	@Transactional
-	public String printWelcome(ModelMap model, Principal principal, @ModelAttribute("projectUser") ProjectUser projectUser) {
+	public String printWelcome(ModelMap model, Principal principal, @ModelAttribute("projectUser") ProjectUser projectUser, HttpSession session) {
  
 		logger.info("XXXXXXXXXXXXXXXXX Entering Welcome GET !");
 		
@@ -78,8 +80,12 @@ public class LoginController {
 		model.put("projectList", projectList);
 		
 		ProjectUser logedInUser = projectUserDao.findUser(name);
+		logedInUser.setSessionId(session.getId());
 		
-		sessionCounter.getUsersOnline().add(logedInUser);
+		logger.info("GGGGGGGGGGGGGG Added Session ID for "+logedInUser+"  is "+logedInUser.getSessionId());
+		
+		//sessionCounter.getUsersOnline().add(logedInUser);
+		sessionCounter.addUserOnline(logedInUser);
 		
 //		if (logedInUser == null)
 //			return "login";
@@ -190,12 +196,16 @@ public class LoginController {
 	}
  
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(ModelMap model, @ModelAttribute ProjectUser user) {
+	public String logout(ModelMap model, @ModelAttribute ProjectUser user, HttpSession session) {
 		model.remove(user);
 		//model.put("user", null);
 		model.addAttribute("username", "");
 		model.addAttribute("logedInUser", new ProjectUser());
 		SecurityContextHolder.getContext().setAuthentication(null);
+		logger.info("LLLLLLLLLLLLLLL Initiate logout for "+session.getId());
+		//Everything else doesnt seem to work, so I had to try this on 18/04/2012
+		session.invalidate();
+		//session.invalidate();
 		return "login";
  
 	}

@@ -6,11 +6,13 @@
 <html>
 <head>
 <title>Tujulishe</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" media="all"
 	rel="stylesheet" type="text/css" />
-<link
+<!-- link
 	href="${pageContext.request.contextPath}/resources/datepicker/css/bootstrap-responsive.css"
-	media="all" rel="stylesheet" type="text/css" />
+	media="all" rel="stylesheet" type="text/css" / -->
 <link href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css"
 	media="all" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/projectmanager.css"
@@ -25,8 +27,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/bootstrap-modal.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.atmosphere.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/projectmanager.js"></script>
+
 </head>
 <body>
 	<script  type="text/javascript"></script>
@@ -55,16 +56,22 @@
 						<span class="notification-count"><span>1</span></span>
 					</div>
 					<div class="span4">
+						<div id="chatname"><c:out value="${logedInUser.firstName}"></c:out></div>
 						<span>Welcome <c:out value="${logedInUser.firstName}"></c:out>
 							<c:out value="${logedInUser.lastName}"></c:out></span> | <a
-							href="${pageContext.request.contextPath}/logout.html">Logout</a> | <a
+							href="${pageContext.request.contextPath}/logout">Logout</a> | <a
 							href="${pageContext.request.contextPath}/posts">Home</a> <br/>   <a href="${pageContext.request.contextPath}/photos">My Photos</a> | <span> <c:out value="${totalUsers}"></c:out> members <span class="blink">online</span></span> <br /> <br /> <a
 							data-toggle="modal" data-target="#myModal" class="mainPost" href="">Add Post</a>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		<script type="text/javascript"
+			src="${pageContext.request.contextPath}/resources/js/projectmanager.js"></script>
+			
+		<script type="text/javascript"
+			src="${pageContext.request.contextPath}/resources/js/application2.js"></script>
+			
 		<div class="row">
 			<br />
 			<div class="span3">
@@ -135,10 +142,10 @@
 			         		     <span> </span>
 			         		     </span>
 			         		     
-			         		     <br/>
+			         		     <!--  br/ -->
 			         		     <br/>
 			            		<span class="projectnormal"></span><br/>
-			            		<br/>
+			            		<!-- br/ -->
 			            		<br/>
 			            		
 			            		<c:if test="${not empty forumPost.listComments}" >
@@ -237,7 +244,7 @@
 						       <!-- Display this guy so that I can know he is online   -->
 						       
 						       <!-- Start Show this guy -->
-						       	<br/>
+						       	<!--  br/ -->
 			            		<span>
 			            		<span>
 									<c:choose>
@@ -252,10 +259,11 @@
 									</c:choose>			            	
 									
 									</span>
+									<span>
 					            	<span><c:out value="${user}" /> </span><span  class="chatonline">chat</span>
-			            	 
+			            	 		</span>
 			            	 </span>
-			            	  <br/>
+			            	  <!--  -br/ -->
 							  <hr/>
 			            	 
 						       <!-- End Show this guy -->

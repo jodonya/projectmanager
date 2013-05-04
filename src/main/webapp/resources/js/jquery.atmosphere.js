@@ -1615,6 +1615,8 @@ jQuery.atmosphere = function() {
                             }
                         }
                     };
+                    
+                    //ajaxRequest.open(request.method, url, true);
                     ajaxRequest.send(rq.data);
 
                     if (rq.suspend) {
