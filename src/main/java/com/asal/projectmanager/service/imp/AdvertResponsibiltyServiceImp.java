@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.dao.AdvertResponsibiltyDao;
+import com.asal.projectmanager.domain.Advert;
 import com.asal.projectmanager.domain.AdvertResponsibilty;
 import com.asal.projectmanager.service.AdvertResponsibiltyService;
 
@@ -45,6 +46,11 @@ public class AdvertResponsibiltyServiceImp implements
 	@Transactional
 	public Long count() {
 		return advertResponsibiltyDao.count();
+	}
+
+	@Transactional
+	public List<AdvertResponsibilty> findAll(Advert advert) {
+		return advertResponsibiltyDao.findAll(advert);
 	}
 
 }

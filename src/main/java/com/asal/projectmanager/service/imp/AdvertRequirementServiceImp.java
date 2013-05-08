@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.dao.AdvertRequirementDao;
+import com.asal.projectmanager.domain.Advert;
 import com.asal.projectmanager.domain.AdvertRequirement;
 import com.asal.projectmanager.service.AdvertRequirementService;
 
@@ -44,6 +45,11 @@ public class AdvertRequirementServiceImp implements AdvertRequirementService {
 	@Transactional
 	public Long count() {
 		return advertRequirementDao.count();
+	}
+
+	@Transactional
+	public List<AdvertRequirement> findAll(Advert advert) {
+		return advertRequirementDao.findAll(advert);
 	}
 
 }

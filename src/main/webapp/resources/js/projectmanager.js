@@ -42,8 +42,22 @@ $(function(){
         trackMessageLength : true,
         fallbackTransport: 'long-polling'}; ***/
 
-    
-    
+	
+	$("#categoryId").hide();
+	$("#ShowHideAddCategory").html('Add Category');
+
+	
+	$("#ShowHideAddCategory").click(function(e){
+		$("#categoryId").slideToggle();
+		
+		if ($("#ShowHideAddCategory").html() == 'Add Category'){
+			$("#ShowHideAddCategory").html('Close');
+		} else{
+			$("#ShowHideAddCategory").html('Add Category');
+		}
+		
+	});
+	
 	
 	blinks(1);
 	
@@ -62,6 +76,10 @@ $(function(){
 	$("#chatclose").click(function(){ 
 		$("#chatcontainer").hide();
 	});
+	
+	
+	
+	
 	
 	
 	

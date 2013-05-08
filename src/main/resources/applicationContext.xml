@@ -68,7 +68,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
-	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	<!-- bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -79,7 +79,7 @@
 				<prop key="java.lang.Exception">error</prop>
 			</props>
 		</property>
-	</bean>
+	</bean -->
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

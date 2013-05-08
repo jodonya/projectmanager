@@ -1,7 +1,7 @@
 <html>
 <body>
  
-	<h2>${exception.customMsg}</h2>
+	<h2>${error}</h2>
 	<span>There is a problem </span>
  
 </body>

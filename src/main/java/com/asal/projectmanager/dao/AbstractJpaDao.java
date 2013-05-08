@@ -22,6 +22,7 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 	private Class<T> clazz;
 	
 	@PersistenceContext
+	protected
 	EntityManager entityManager;
 	@Autowired
 	ProjectManagerSession projectManagerSession;

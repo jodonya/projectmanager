@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -39,6 +40,8 @@ public class Advert extends DomainObject {
 
 	@Column(length = 1000)
 	private String name;
+	
+	private String location;
 	private AdvertType advertType;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -47,6 +50,9 @@ public class Advert extends DomainObject {
 	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id")
 	)
 	private Set<AdvertCategory> categoryList;
+	
+	@Transient
+	private String tempDeadLine;
 
 	@Column(length = 50000)
 	private String details;
@@ -56,6 +62,10 @@ public class Advert extends DomainObject {
 
 	private Date deadLine;
 	private AdvertPriority advertPriority;
+	
+	private String sourceName;
+	
+	private String sourceWebsite;
 
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	//
@@ -168,6 +178,52 @@ public class Advert extends DomainObject {
 
 	public void setListAdvertDown(List<AdvertDown> listAdvertDown) {
 		this.listAdvertDown = listAdvertDown;
+	}
+	
+	
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Set<AdvertCategory> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(Set<AdvertCategory> categoryList) {
+		this.categoryList = categoryList;
+	}
+	
+	
+
+	public String getTempDeadLine() {
+		return tempDeadLine;
+	}
+
+	public void setTempDeadLine(String tempDeadLine) {
+		this.tempDeadLine = tempDeadLine;
+	}
+	
+	
+
+	public String getSourceName() {
+		return sourceName;
+	}
+
+	public void setSourceName(String sourceName) {
+		this.sourceName = sourceName;
+	}
+
+	public String getSourceWebsite() {
+		return sourceWebsite;
+	}
+
+	public void setSourceWebsite(String sourceWebsite) {
+		this.sourceWebsite = sourceWebsite;
 	}
 
 	@Override

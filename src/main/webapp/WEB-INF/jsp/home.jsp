@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -17,7 +18,7 @@
   			<div class="span12"> <br/>
   			<div>
   				<div class="row">
-  					<div class="span8"><h1>Tujulishe</h1></div>
+  					<div class="span8"><h1>Tujulishe - Who is hiring?</h1></div>
   					<div class="span4"> <a href="${pageContext.request.contextPath}/login">Sign In</a> </div>
   				</div>
   				
@@ -48,8 +49,41 @@
 							< button type="submit" class="btn">Submit</button -->
 						</form>
 					</div>
-
+					
 					<div>
+					
+					<c:if test="${not empty listAdvert}" >
+					<table class="table table-striped">  
+			      
+			           
+			         	<c:forEach items="${listAdvert}" var="advert">	
+			         	
+			         										<tr>
+								<td><img src="${pageContext.request.contextPath}/resources/images/thumbnailtujulishelogo.png"></img></td>
+								<td><span class="adText"><c:out value="${advert.name}" /> </span><br />
+									<span>
+										<!-- a href="">Business</a>| <a href="">Account</a>| <a href="">ICT</a -->
+									</span> <br/>
+									<span>
+										source : <a href="${advert.sourceWebsite}">${advert.sourceName}</a> Adverts
+									</span>
+									
+
+								</td>
+								<td><a href="${advert.company.webaddress}"><c:out value="${advert.company.name}" /></a>	
+								</td>
+								<td><span style="color: red;">Deadline</span> <br/><fmt:formatDate value="${advert.deadLine}" type="both" pattern="dd MMMM yyyy" /></td>
+								<td><a href="/addetails/${advert.id}">Full Details</a></td>
+							</tr>
+			          	</c:forEach>
+			      	</table>  
+			      </c:if>
+			      <c:if test="${empty listAdvert}" >
+							There are no Adverts yet. 
+				  </c:if>
+					</div>
+
+					<!-- div>
 						<table>
 							<tr>
 								<td><img src="${pageContext.request.contextPath}/resources/images/thumbnailfinlayimage.jpg"></img></td>
@@ -90,7 +124,7 @@
 							</tr>
 
 						</table>
-					</div>
+					</div -->
     	</div>
     	
     	<div class="span2"> <br/>

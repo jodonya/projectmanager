@@ -10,9 +10,13 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
 	media="all" rel="stylesheet" type="text/css" />
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.9.0.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/projectmanager.css"
 	media="all" rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/projectmanager.js"></script>
 </head>
 <body>
 
@@ -49,116 +53,35 @@
 			<br />
 			<div class="span6">
 				<br />
-				<!-- h1>Ad Listing</h1 -->
-				<br />
-				<!-- span>Registered to Post Ads.</span -->
-				<br />
-				<div class="nobodders">
-				<div>
-						<form class="form-horizontal">
-							<fieldset>
-								<legend>Add Advert</legend>
-								 <div class="control-group">  
-						            <label class="control-label" for="select01">Business</label>  
-						            <div class="controls">  
-						              <select id="select01">  
-						                <option>Select Business/Company</option>  
-						                <option>Kakamega</option>  
-						                <option>Finlays</option>  
-						                <option>Sweeden</option>  
-						                <option>Lutheran World Federation</option>  
-						              </select>  
-						            </div>  
-						          </div>
-								<div class="control-group">
-									<label class="control-label" for="input01">Job/Vacancy</label>
-									<div class="controls">
-										<input type="text" class="input-xlarge" id="input01">
-										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
-									</div>
-								</div>
-
-								<div class="control-group">
-									<label class="control-label" for="textarea">Details
-										</label>
-									<div class="controls">
-										<textarea class="input-xlarge" id="textarea" rows="10"></textarea>
-									</div>
-								</div>
-
-								<div class="control-group">
-									<label class="control-label" for="textarea">Summarize
-										</label>
-									<div class="controls">
-										<textarea class="input-xlarge" id="textarea" rows="4"></textarea>
-									</div>
-								</div>
-
-								<div class="control-group">
-									<label class="control-label" for="input01">Deadline</label>
-									<div class="controls">
-										<input type="text" class="input-xlarge" id="input01">
-										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
-									</div>
-								</div>
-								
-								<div class="control-group">  
-						            <label class="control-label" for="select01">Category</label>  
-						            <div class="controls">  
-						              <select id="select01">  
-						                <option>Add Category</option>  
-						                <option>ICT</option>  
-						                <option>Construction</option>  
-						                <option>Business</option>  
-						                <option>Law</option>  
-						              </select>  
-						            </div>  
-						          </div>
-								
-
-								<div class="form-actions">
-									<button type="submit" class="btn btn-primary">Save
-										Advert</button>
-									<button class="btn">Cancel</button>
-								</div>
-							</fieldset>
-						</form>
-					</div>
-					
 				
-
-					<div class="nobodders">
-						<!-- form class="well" -->
-						<form>
-							<!-- label>Label name</label --> <input type="text" class="span3"
-								placeholder="search…"> <!--span class="help-inline">Associated
-								help text!</span> < label class="checkbox"> <input
-								type="checkbox"> Check me out
-							</label>
-							< button type="submit" class="btn">Submit</button -->
-						</form>
+				<!-- Business Listing Starts Here -->
+				
+				<div>
+					
+					<c:if test="${not empty listCompany}" >
+					<table class="table table-striped">  
+			      
+			         <tbody>  
+			         	<c:forEach items="${listCompany}" var="company">	
+			         		<tr>  
+			            		<td class="adText"> <a href="/advert/${company.id}"> <c:out value="${company.name}" /></a> <br/>
+			            		<br/>
+			            		<hr/>
+			            			<span>|<a href="/companyphotos/${company.id}">Add Photo</a>|</span>
+			            		</td>  
+			            		<td><c:out value="${company.location}" /> </td> 
+			            		<td><c:out value="${company.phoneNo}" /> </td> 
+			            		<td><a href="company/${company.id}">Delete</a></td> 
+			          		</tr>  
+			          	</c:forEach>
+			      	</table>  
+			      </c:if>
+			      <c:if test="${empty listCompany}" >
+							There are no companies/businesses yet. 
+				  </c:if>
 					</div>
-
-					<div>
-						<table>
-							<tr>
-								<td class="adText">Regional Financial Controller Eastern
-									Africa <br />
-
-								</td>
-								<td>by Swedish Corporative Center</td>
-								<td><a href="">Details</a></td>
-							</tr>
-
-							<tr>
-								<td class="adText">Assistant Research Manager</td>
-								<td>by Finlays</td>
-								<td><a href="">Details</a></td>
-							</tr>
-
-						</table>
-					</div>
-				</div>
+	
+	
 			</div>
 
 			<div class="span6">
@@ -166,13 +89,13 @@
 
 				<div class="nobodders">
 					<div>
-						<form class="form-horizontal">
+						<form:form class="form-horizontal"  action="advert" modelAttribute="company">
 							<fieldset>
 								<legend>Register Business</legend>
 								<div class="control-group">
 									<label class="control-label" for="input01">Name</label>
 									<div class="controls">
-										<input type="text" class="input-xlarge" id="input01">
+										<form:input path="name" type="text"  class="input-xlarge" id="name"/>
 										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
 									</div>
 								</div>
@@ -181,7 +104,7 @@
 									<label class="control-label" for="textarea">Physical
 										Location</label>
 									<div class="controls">
-										<textarea class="input-xlarge" id="textarea" rows="3"></textarea>
+										<form:textarea  path="location"  class="input-xlarge" id="location" rows="3"></form:textarea>
 									</div>
 								</div>
 
@@ -189,7 +112,7 @@
 									<label class="control-label" for="input01">Contact
 										Person</label>
 									<div class="controls">
-										<input type="text" class="input-xlarge" id="input01">
+										<form:input path="contactPerson" type="text" class="input-xlarge" id="contactPerson"/>
 										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
 									</div>
 								</div>
@@ -197,7 +120,7 @@
 								<div class="control-group">
 									<label class="control-label" for="input01">Phone No.</label>
 									<div class="controls">
-										<input type="text" class="input-xlarge" id="input01">
+										<form:input  path="phoneNo" type="text" class="input-xlarge" id="phoneNo"/>
 										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
 									</div>
 								</div>
@@ -205,7 +128,14 @@
 								<div class="control-group">
 									<label class="control-label" for="input01">Email</label>
 									<div class="controls">
-										<input type="text" class="input-xlarge" id="input01">
+										<form:input path="email" type="text" class="input-xlarge" id="email"/>
+										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="input01">Website</label>
+									<div class="controls">
+										<form:input path="webaddress" type="text" class="input-xlarge" id="webaddress"/>
 										<!-- p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p -->
 									</div>
 								</div>
@@ -215,25 +145,9 @@
 									<button class="btn">Cancel</button>
 								</div>
 							</fieldset>
-						</form>
+						</form:form>
 					</div>
-					<div>
-						<table>
-							<tr>
-								<td class="adText">KAKAMEGA TEACHERS AND CREDIT COOPERATIVE SOCIETY LTD</td>
-								<td>Kateko Plaza, Muruli Road, Behind Posta or Telcom Kenya
-								</td>
-								<td>0726340851</td>
-							</tr>
 
-							<tr>
-								<td class="adText">Finlays</td>
-								<td>Kericho</td>
-								<td>careers@finlays.co.ke</td>
-							</tr>
-
-						</table>
-					</div>
 				</div>
 
 

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,6 +35,10 @@ public class Company extends DomainObject {
 	private String webaddress;
 	private String facebookpage;
 	private String twitterhandle;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="photo_id")
+	private CompanyPhoto companyPhoto;
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="company")
 	private List<Advert> listAdvert; 
@@ -85,6 +91,20 @@ public class Company extends DomainObject {
 	}
 	public void setTwitterhandle(String twitterhandle) {
 		this.twitterhandle = twitterhandle;
+	}
+	
+	
+	public CompanyPhoto getCompanyPhoto() {
+		return companyPhoto;
+	}
+	public void setCompanyPhoto(CompanyPhoto companyPhoto) {
+		this.companyPhoto = companyPhoto;
+	}
+	public List<Advert> getListAdvert() {
+		return listAdvert;
+	}
+	public void setListAdvert(List<Advert> listAdvert) {
+		this.listAdvert = listAdvert;
 	}
 	@Override
 	public String toString() {

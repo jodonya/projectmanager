@@ -17,6 +17,7 @@
 		<intercept-url pattern="/setup*" access="ROLE_USER" />
 		<intercept-url pattern="/photo*" access="ROLE_USER" />
 		<intercept-url pattern="/advert*" access="ROLE_USER" />
+		<intercept-url pattern="/advert/*" access="ROLE_USER"/>
 		<!-- intercept-url pattern="/" access="ROLE_USER" / -->
 		<form-login login-page="/login" 
 			authentication-failure-url="/loginfailed" authentication-success-handler-ref="simpleUrlAuthenticationSuccessHandler"/>

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.asal.projectmanager.dao.AdvertDao;
 import com.asal.projectmanager.domain.Advert;
+import com.asal.projectmanager.domain.Company;
 import com.asal.projectmanager.service.AdvertService;
 
 @Service
@@ -46,6 +47,11 @@ public class AdvertServiceImp implements AdvertService {
 	@Transactional
 	public Long count() {
 		return advertDao.count();
+	}
+
+	@Transactional
+	public List<Advert> findAll(Company company) {
+		return advertDao.findAll(company);
 	}
 
 }
