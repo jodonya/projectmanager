@@ -10,9 +10,9 @@
 	default-autowire="byName">
 
 	<!-- Enable wiring via Annotations -->
-	<context:component-scan base-package="com.asal.projectmanager.dao"
+	<context:component-scan base-package="com.asal.projectmanager.dao, com.asal.projectmanager.daoimp"
 		scoped-proxy="targetClass" />
-	<context:component-scan base-package="com.asal.projectmanager.service"
+	<context:component-scan base-package="com.asal.projectmanager.service, com.asal.projectmanager.service.imp"
 		scoped-proxy="targetClass" />
 		<context:property-placeholder location="classpath:app.properties" />
 
