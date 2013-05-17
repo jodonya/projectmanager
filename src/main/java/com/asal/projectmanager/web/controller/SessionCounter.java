@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -13,7 +14,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.asal.projectmanager.domain.AccessLog;
 import com.asal.projectmanager.domain.ProjectUser;
+import com.asal.projectmanager.service.AccessLogService;
 @Service
 public class SessionCounter implements HttpSessionListener {
 
@@ -25,6 +28,9 @@ public class SessionCounter implements HttpSessionListener {
 	@Autowired
 	ProjectManagerSession projectManagerSession;
 	
+	@Autowired
+	AccessLogService accessLogService;
+	
 	public SessionCounter(){
 		
 	}
@@ -34,6 +40,13 @@ public class SessionCounter implements HttpSessionListener {
 		HttpSession session = event.getSession();
 		sessions.add(session.getId());
 		logger.info("GGGGGGGGGGGGGGg The New session   is "+session.getId());
+		
+		
+		//Save a log - new access to the site
+//		AccessLog accessLog = new AccessLog();
+//		accessLog.setCount(1L);
+//		
+//		accessLogService.add(accessLog);
 
 		
 		//ProjectUser loggedInUser = (ProjectUser) session.getAttribute("loggedInUser");

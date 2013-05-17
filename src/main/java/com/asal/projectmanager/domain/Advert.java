@@ -71,25 +71,29 @@ public class Advert extends DomainObject {
 	//
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advert")
 	@Fetch(value = FetchMode.SUBSELECT)
-	private List<AdvertResponsibilty> listResponsibilities;
+	private Set<AdvertResponsibilty> listResponsibilities;
 
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	//
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advert")
 	@Fetch(value = FetchMode.SUBSELECT)
-	private List<AdvertRequirement> listRequirements;
+	private Set<AdvertRequirement> listRequirements;
 
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	//
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advert")
 	@Fetch(value = FetchMode.SUBSELECT)
-	private List<AdvertUp> listAdvertUp;
+	private Set<AdvertUp> listAdvertUp;
 
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	//
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advert")
 	@Fetch(value = FetchMode.SUBSELECT)
-	private List<AdvertDown> listAdvertDown;
+	private Set<AdvertDown> listAdvertDown;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advert")
+	@Fetch(value = FetchMode.SUBSELECT)
+	private Set<AdvertComment> listAdvertComments;
 
 	public Company getCompany() {
 		return company;
@@ -147,38 +151,7 @@ public class Advert extends DomainObject {
 		this.advertPriority = advertPriority;
 	}
 
-	public List<AdvertResponsibilty> getListResponsibilities() {
-		return listResponsibilities;
-	}
-
-	public void setListResponsibilities(
-			List<AdvertResponsibilty> listResponsibilities) {
-		this.listResponsibilities = listResponsibilities;
-	}
-
-	public List<AdvertRequirement> getListRequirements() {
-		return listRequirements;
-	}
-
-	public void setListRequirements(List<AdvertRequirement> listRequirements) {
-		this.listRequirements = listRequirements;
-	}
-
-	public List<AdvertUp> getListAdvertUp() {
-		return listAdvertUp;
-	}
-
-	public void setListAdvertUp(List<AdvertUp> listAdvertUp) {
-		this.listAdvertUp = listAdvertUp;
-	}
-
-	public List<AdvertDown> getListAdvertDown() {
-		return listAdvertDown;
-	}
-
-	public void setListAdvertDown(List<AdvertDown> listAdvertDown) {
-		this.listAdvertDown = listAdvertDown;
-	}
+	
 	
 	
 
@@ -224,6 +197,47 @@ public class Advert extends DomainObject {
 
 	public void setSourceWebsite(String sourceWebsite) {
 		this.sourceWebsite = sourceWebsite;
+	}
+
+	public Set<AdvertResponsibilty> getListResponsibilities() {
+		return listResponsibilities;
+	}
+
+	public void setListResponsibilities(
+			Set<AdvertResponsibilty> listResponsibilities) {
+		this.listResponsibilities = listResponsibilities;
+	}
+
+	public Set<AdvertRequirement> getListRequirements() {
+		return listRequirements;
+	}
+
+	public void setListRequirements(Set<AdvertRequirement> listRequirements) {
+		this.listRequirements = listRequirements;
+	}
+
+	public Set<AdvertUp> getListAdvertUp() {
+		return listAdvertUp;
+	}
+
+	public void setListAdvertUp(Set<AdvertUp> listAdvertUp) {
+		this.listAdvertUp = listAdvertUp;
+	}
+
+	public Set<AdvertDown> getListAdvertDown() {
+		return listAdvertDown;
+	}
+
+	public void setListAdvertDown(Set<AdvertDown> listAdvertDown) {
+		this.listAdvertDown = listAdvertDown;
+	}
+
+	public Set<AdvertComment> getListAdvertComments() {
+		return listAdvertComments;
+	}
+
+	public void setListAdvertComments(Set<AdvertComment> listAdvertComments) {
+		this.listAdvertComments = listAdvertComments;
 	}
 
 	@Override

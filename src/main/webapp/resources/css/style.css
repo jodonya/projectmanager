@@ -1,0 +1,77 @@
+body {
+	
+	font: 13px/1.231 arial,helvetica,clean,sans-serif;
+	
+}
+
+.row-top {
+	
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+	float: none;
+    margin: 0 auto;
+	height:100px;
+
+}
+
+.main-bg {
+	background:url(../images/main-bg.gif)
+}
+
+
+
+
+
+
+#login-sub-container {
+	
+    border: 1px solid rgba(63, 65, 67, 0.5);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 6px 10px -2px #3F4143;
+    left: 5px;
+    position: absolute;
+    width: 345px;
+	
+}
+
+#login-sub-header {
+    background: linear-gradient(to bottom, #E5E5E5 0px, #D4D4D4 100%) repeat scroll 0 0 transparent;
+    border-color: -moz-use-text-color -moz-use-text-color #A1A1A1;
+    border-radius: 5px 5px 0 0;
+    border-style: none none solid;
+    border-width: 0 0 1px medium;
+    height: 65px;
+    padding: 10px 0 0;
+    text-align: center;
+}
+
+#login-sub, #security-sub {
+    background-color: #EAEAEA;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #FFFFFF;
+    color: #4C4C4C;
+    font-size: 12px;
+    height: 212px;
+    padding-left: 30px;
+    padding-right: 5px;
+    padding-top: 30px;
+}
+
+
+html[dir="ltr"] .input-field-login.icon {
+    background-position: 6px 6px;
+}
+
+.input-field-login.icon {
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    border: 2px solid #BEBEBE;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 10px 10px #E9E9E9 inset;
+    height: 32px;
+}
+
+
+

@@ -28,7 +28,9 @@ import com.asal.projectmanager.domain.Location;
 import com.asal.projectmanager.domain.Project;
 import com.asal.projectmanager.domain.ProjectStatus;
 import com.asal.projectmanager.domain.ProjectUser;
+import com.asal.projectmanager.domain.SignInLog;
 import com.asal.projectmanager.domain.UserRole;
+import com.asal.projectmanager.service.SignInLogService;
 
 @Controller
 //@Scope("request")
@@ -53,6 +55,9 @@ public class LoginController {
 	
 	@Autowired
 	SessionCounter sessionCounter;
+	
+	@Autowired
+	SignInLogService signInLogService;
 	
 	
 	@RequestMapping(value="/welcome", method = RequestMethod.GET)
@@ -87,6 +92,11 @@ public class LoginController {
 		//sessionCounter.getUsersOnline().add(logedInUser);
 		sessionCounter.addUserOnline(logedInUser);
 		
+		SignInLog signInLog = new SignInLog();
+		signInLog.setNames(logedInUser.getFirstName()+" "+logedInUser.getLastName());
+		signInLogService.add(signInLog);
+		
+		
 //		if (logedInUser == null)
 //			return "login";
 //		
@@ -99,8 +109,8 @@ public class LoginController {
 		logger.info(" I have set the logged in user to "+projectManagerSession.getUser().getFirstName());
 		
 
-		
-		return "redirect:/posts";
+		//posts
+		return "redirect:/home";
  
 	}
 	

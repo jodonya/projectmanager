@@ -1,6 +1,6 @@
 package com.asal.projectmanager.domain;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -41,7 +41,7 @@ public class Company extends DomainObject {
 	private CompanyPhoto companyPhoto;
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="company")
-	private List<Advert> listAdvert; 
+	private Set<Advert> listAdvert; 
 
 	
 	public String getName() {
@@ -100,10 +100,11 @@ public class Company extends DomainObject {
 	public void setCompanyPhoto(CompanyPhoto companyPhoto) {
 		this.companyPhoto = companyPhoto;
 	}
-	public List<Advert> getListAdvert() {
+	
+	public Set<Advert> getListAdvert() {
 		return listAdvert;
 	}
-	public void setListAdvert(List<Advert> listAdvert) {
+	public void setListAdvert(Set<Advert> listAdvert) {
 		this.listAdvert = listAdvert;
 	}
 	@Override

@@ -54,4 +54,29 @@ public class AdvertServiceImp implements AdvertService {
 		return advertDao.findAll(company);
 	}
 
+	@Transactional
+	public List<Advert> findAllActive(Company company) {
+		return advertDao.findAllActive(company);
+	}
+
+	@Transactional
+	public List<Advert> findAllActive() {
+		return advertDao.findAllActive();
+	}
+
+	@Transactional
+	public List<Advert> findAllExpired(Company company) {
+		return findAllExpired(company);
+	}
+
+	@Transactional
+	public List<Advert> findAllExpired() {
+		return advertDao.findAllExpired();
+	}
+
+	@Transactional
+	public Advert findAdvert(String name) {
+		return advertDao.findAdvert(name);
+	}
+
 }

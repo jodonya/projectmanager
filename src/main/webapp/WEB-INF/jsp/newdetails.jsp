@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -14,22 +14,28 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
 	media="all" rel="stylesheet" type="text/css" />
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.9.0.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/projectmanager.css"
 	media="all" rel="stylesheet" type="text/css" />
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/projectmanager.js"></script>
-	
-		<link href="${pageContext.request.contextPath}/resources/datepicker/css/bootstrap-responsive.css" media="all" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css" media="all" rel="stylesheet" type="text/css"/>
-	
-    
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen"
-     href="${pageContext.request.contextPath}/resources/css/bootstrap-datetimepicker.min.css">	
-	
+
+<link
+	href="${pageContext.request.contextPath}/resources/datepicker/css/bootstrap-responsive.css"
+	media="all" rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css"
+	media="all" rel="stylesheet" type="text/css" />
+
+
+<link
+	href="${pageContext.request.contextPath}/resources/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap-datetimepicker.min.css">
+
 </head>
 <body>
 
@@ -45,19 +51,20 @@
 							<h2>
 								<c:out value="${advert.company}" />
 							</h2>
-							<br/>
+							<br />
 							<h3>
-								<c:out value="${advert.name}" /> - Add Details
+								<c:out value="${advert.name}" />
+								- Add Details
 							</h3>
-							
+
 						</div>
 						<div class="span4">
 							<!--  a href="${pageContext.request.contextPath}/login">Sign In</a -->
-							<span>Add Businesses and Adverts !</span>
-							<br/>
+							<span>Add Businesses and Adverts !</span> <br />
 							<div style="float: right;">
-								<a href="/advert">Business Listing</a> <br/>
-								<a href="/advert/${advert.company.id}"><c:out value="${advert.company}" /> adverts</a>
+								<a href="/advert">Business Listing</a> <br /> <a
+									href="/advert/${advert.company.id}"><c:out
+										value="${advert.company}" /> adverts</a>
 							</div>
 						</div>
 					</div>
@@ -84,13 +91,43 @@
 				<br />
 				<div class="nobodders">
 					<div>
-						<form:form class="form-horizontal" action="/addrequirement/${advert.id}" modelAttribute="advertRequirement" >
+						<form:form class="form-horizontal"
+							action="/assigncategory/${advert.id}"
+							modelAttribute="assignCategory">
+							<fieldset>
+								<legend>Assign Category</legend>
+								<div class="control-group">
+									<label class="control-label" for="projectType">Category
+										</label>
+									<div class="controls">
+										<form:select path="advertCategory.id">
+											<form:option value="" label="--Please Select" />
+											<form:options items="${advertCategoryList}" itemValue="id"
+												itemLabel="name" />
+										</form:select>
+									</div>
+								</div>
+								<div class="form-actions">
+									<form:button type="submit" class="btn btn-primary">Assign
+										</form:button>
+									<form:button class="btn">Cancel</form:button>
+								</div>
+							</fieldset>
+						</form:form>
+					</div>
+
+					<div>
+						<form:form class="form-horizontal"
+							action="/addrequirement/${advert.id}"
+							modelAttribute="advertRequirement">
 							<fieldset>
 								<legend>Add Requirement</legend>
 								<div class="control-group">
-									<label class="control-label" for="textarea">Requirement </label>
+									<label class="control-label" for="textarea">Requirement
+									</label>
 									<div class="controls">
-										<form:textarea path="name" class="input-xlarge" id="requirementName" rows="10"></form:textarea>
+										<form:textarea path="name" class="input-xlarge"
+											id="requirementName" rows="10"></form:textarea>
 									</div>
 								</div>
 								<div class="form-actions">
@@ -101,15 +138,19 @@
 							</fieldset>
 						</form:form>
 					</div>
-					
+
 					<div>
-						<form:form class="form-horizontal" action="/addresponsibility/${advert.id}" modelAttribute="advertResponsibility" >
+						<form:form class="form-horizontal"
+							action="/addresponsibility/${advert.id}"
+							modelAttribute="advertResponsibility">
 							<fieldset>
 								<legend>Add Responsibility</legend>
 								<div class="control-group">
-									<label class="control-label" for="textarea">Responsibilty </label>
+									<label class="control-label" for="textarea">Responsibilty
+									</label>
 									<div class="controls">
-										<form:textarea path="name" class="input-xlarge" id="responsibilityName" rows="10"></form:textarea>
+										<form:textarea path="name" class="input-xlarge"
+											id="responsibilityName" rows="10"></form:textarea>
 									</div>
 								</div>
 								<div class="form-actions">
@@ -120,17 +161,43 @@
 							</fieldset>
 						</form:form>
 					</div>
-					
+
 
 				</div>
 			</div>
 
 			<div class="span6">
+			
+			<!-- Start Assigned Categories -->
+							<!-- Ads Listing Starts here -->
+				<br />
+				<h3>Assigned Categories</h3>
+				<br />
 
+				<div>
+					<c:if test="${not empty listAssignedCategories}">
+						<table class="table table-striped">
+
+							<tbody>
+								<c:forEach items="${listAssignedCategories}" var="assignedCategory">
+									<tr>
+										<td><c:out value="${assignedCategory.advertCategory}" /></td>
+										<td><a href="/deleteAssignedCategory/${assignedCategory.id}">Remove</a></td>
+									</tr>
+								</c:forEach>
+						</table>
+					</c:if>
+					<c:if test="${empty listAssignedCategories}">
+							Please Assign One or More Categories. 
+				  </c:if>
+				</div>
+
+				<br />
+			<!-- End Assigned Categories -->
 				<!-- Ads Listing Starts here -->
 				<br />
 				<h3>Requirements Listing</h3>
-				<br/>
+				<br />
 
 				<div>
 					<c:if test="${not empty listRequirements}">
@@ -149,13 +216,13 @@
 							There are no Requirements yet. 
 				  </c:if>
 				</div>
-				
+
 				<br />
-				
+
 				<h3>Responsibilities</h3>
-				<br/>
+				<br />
 				<div>
-				
+
 					<c:if test="${not empty listResponsibilities}">
 						<table class="table table-striped">
 
@@ -172,12 +239,12 @@
 							There are no Responsibilities yet. 
 				  </c:if>
 				</div>
-				</div>
-
-
-
 			</div>
 
+
+
 		</div>
+
+	</div>
 </body>
 </html>

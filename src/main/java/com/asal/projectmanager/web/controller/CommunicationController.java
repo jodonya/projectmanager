@@ -58,7 +58,7 @@ public class CommunicationController {
 	@Autowired
 	SessionCounter sessionCounter;
 
-	@RequestMapping(value = {"/","/posts"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/posts"}, method = RequestMethod.GET)
 	//@RequestMapping(value = {"/posts"}, method = RequestMethod.GET)
 	@Transactional
 	public String showPosts(@ModelAttribute("forumPost") ForumPost forumPost, @ModelAttribute("postComment") PostComment postComment,
@@ -84,7 +84,7 @@ public class CommunicationController {
 		return "posts";
 	}
 
-	@RequestMapping(value = {"/","/posts"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/posts"}, method = RequestMethod.POST)
 	//@RequestMapping(value = {"/posts"}, method = RequestMethod.POST)
 	@Transactional
 	public String addPost(@ModelAttribute("forumPost") ForumPost forumPost, @ModelAttribute("postComment") PostComment postComment,

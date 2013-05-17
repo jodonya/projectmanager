@@ -16,7 +16,6 @@ ul>li:hover {
 	border-radius: 20px;
 }
 
-
 /***
 	Work Around just to remove the borders background color on the divs
 **/
@@ -189,9 +188,8 @@ p .chat {
 	display: none;
 }
 
-.adText{
+.adText {
 	font-size: 20px;
-	
 }
 
 .menubutton {
@@ -205,3 +203,33 @@ p .chat {
 	color: white;
 	font-weight: bold;
 }
+
+#mainheader h1 {
+	font-size: 140px;
+	color: green;
+	font-weight: bold;
+}
+
+#keynote{
+	font-size: 50px;
+margin-top: 5px;
+margin-left: 205px;
+padding-top: 380px;
+	
+}
+
+.topmost{
+	margin-top: 0;
+		background-color: #eee;
+	border: 0.5px solid #888;
+	border-radius: 20px;
+	
+}
+
+.signuptext{
+	font-size: 40px;
+	font-weight: bold;
+}
+
+
+

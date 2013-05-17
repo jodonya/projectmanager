@@ -1,6 +1,7 @@
 package com.asal.projectmanager.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -13,8 +14,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 /****
  * @author japheth
@@ -41,13 +40,13 @@ public class AdvertComment extends DomainObject {
 	// fetch=FetchType.EAGER,
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advertComment")
 	@Fetch(value = FetchMode.SUBSELECT)
-	private List<AdvertCommentUp> listAdvertCommentUps;
+	private Set<AdvertCommentUp> listAdvertCommentUps;
 
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	// fetch=FetchType.EAGER,
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "advertComment")
 	@Fetch(value = FetchMode.SUBSELECT)
-	private List<AdvertCommentDown> listAdvertCommentDowns;
+	private Set<AdvertCommentDown> listAdvertCommentDowns;
 
 	public Advert getAdvert() {
 		return advert;
@@ -65,21 +64,20 @@ public class AdvertComment extends DomainObject {
 		this.name = name;
 	}
 
-	public List<AdvertCommentUp> getListAdvertCommentUps() {
+	public Set<AdvertCommentUp> getListAdvertCommentUps() {
 		return listAdvertCommentUps;
 	}
 
-	public void setListAdvertCommentUps(
-			List<AdvertCommentUp> listAdvertCommentUps) {
+	public void setListAdvertCommentUps(Set<AdvertCommentUp> listAdvertCommentUps) {
 		this.listAdvertCommentUps = listAdvertCommentUps;
 	}
 
-	public List<AdvertCommentDown> getListAdvertCommentDowns() {
+	public Set<AdvertCommentDown> getListAdvertCommentDowns() {
 		return listAdvertCommentDowns;
 	}
 
 	public void setListAdvertCommentDowns(
-			List<AdvertCommentDown> listAdvertCommentDowns) {
+			Set<AdvertCommentDown> listAdvertCommentDowns) {
 		this.listAdvertCommentDowns = listAdvertCommentDowns;
 	}
 
