@@ -36,6 +36,16 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/functions.js">
         </script>
+        <link
+	href="${pageContext.request.contextPath}/resources/css/tujulishevalidation.css"
+	media="all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/functions.js">
+        </script>
+        <script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.9.0.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/tujulishevalidations.js"></script>
     </head>
     <body>
         <div class="row-top-segment">
@@ -66,13 +76,12 @@
                 <div class="second-layer">
                     <form class="input-append pull-right" method="GET" action="/search/">
                         <input type="text" class="select2-search" autocomplete="off" tabindex="-1">
-                    </form><span class="login-cred"><a href="">Welcome Japheth</a></span>
-                    <span class="logout"><a href="">Logout</a></span>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="advert-holder">
-            <span class="advert">Who is hiring? </span>
+            <span class="advert">Who is hiring? <a href="/main">Sign Up</a></span>
             <span class="advert2"> Tujulishe Platform </span>
             <div class="advertexpired"><span style="float: right;"><a href="/home">All Active Jobs</a> | <a href="/homeexpired">Expired Jobs (Old)</a> </span><br/> <span style="float: right;">  Sort By <a href="/homebyexpiry">Expiry</a> | <a href="/homebydateposted">Posted</a></span></div>
         </div>
@@ -88,26 +97,26 @@
                     
                     	
 						<div class="sidelink">
-                           <span><a href="/todayads">Today (10)</a></span>
+                           <span><a href="/todayads">Today (<c:out value="${todayAdvertscount}" />)</a></span>
                         </div>
                         <div class="sidelink">
-                           <span><a href="/yesterdayads">Yesterday (5)</a></span>
-                        </div>
-                        
-                        <div class="sidelink">
-                           <span><a href="/lastweekads">Less than a week ago (5)</a></span>
+                           <span><a href="/yesterdayads">Yesterday (<c:out value="${yesterdayAdvertscount}" />)</a></span>
                         </div>
                         
                         <div class="sidelink">
-                           <span><a href="/last2weekads">Less than 2 weeks ago (5)</a></span>
+                           <span><a href="/lastweekads">Past Week (<c:out value="${pastweekAdvertscount}" />)</a></span>
+                        </div>
+                        
+                        <div class="sidelink">
+                           <span><a href="/last2weekads">Past Two Weeks (<c:out value="${past2weeksAdvertscount}" />)</a></span>
                         </div>
                         
                          <div class="sidelink">
-                           <span><a href="/lastmonth">Less than a month (5)</a></span>
+                           <span><a href="/lastmonth">Less than a month (<c:out value="${oneMonthOldAdvertscount}" />)</a></span>
                         </div>
                         
                          <div class="sidelink">
-                           <span><a href="/home">All Active (100)</a> </span>
+                           <span><a href="/morethanamonth">More than a month ago (<c:out value="${olderthanOneMonthAdvertscount}" />)</a> </span>
                         </div>
 						
                     </article>
@@ -192,17 +201,19 @@
 		<table>
 			<tr>
 				<td>Email:</td>
-				<td><input type='text' name='j_username' value=''>
+				<td><input type='text'  class="textfieldlogin" name='j_username' value=''>
+				<br/><p class="registerwarninglogin">Please Provide Email!</p>
 				</td>
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><input type='password' name='j_password' />
+				<td><input type='password' class="textfieldlogin" name='j_password' />
+				<br/><p class="registerwarninglogin">Please Provide Password!</p>
 				</td>
 			</tr>
 			<tr>
 				<td colspan='2' align="center"><input name="submit" type="submit"
-					value="Login" class="btn btn-primary" /> 
+					value="Login" class="btn btn-primary loginButton" /> 
 				</td>
 				<td colspan='2'>
 				</td>

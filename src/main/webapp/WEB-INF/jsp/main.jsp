@@ -33,9 +33,16 @@
 <!--link
 	href="${pageContext.request.contextPath}/resources/css/projectmanager.css"
 	media="all" rel="stylesheet" type="text/css" / -->
+	<link
+	href="${pageContext.request.contextPath}/resources/css/tujulishevalidation.css"
+	media="all" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/functions.js">
         </script>
+        <script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.9.0.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/tujulishevalidations.js"></script>
     </head>
     <body>
         <div class="row-top-segment">
@@ -66,8 +73,18 @@
                 <div class="second-layer">
                     <form class="input-append pull-right" method="GET" action="/search/">
                         <input type="text" class="select2-search" autocomplete="off" tabindex="-1">
-                    </form><span class="login-cred"><a href="">Welcome Japheth</a></span>
-                    <span class="logout"><a href="">Logout</a></span>
+                    </form>
+                    <c:if test="${empty logedInUser}">
+							<span class="login-cred">
+							<a href="${pageContext.request.contextPath}/login">Sign In</a>
+							</span>
+							</c:if>
+							<c:if test="${ not empty logedInUser}">
+							<span class="login-cred">Welcome <c:out
+							value="${logedInUser}"></c:out></span>
+							<br />
+							<span class="logout"> <a href="${pageContext.request.contextPath}/logout">Logout</a></span>
+							</c:if>
                 </div>
             </div>
         </div>
@@ -86,28 +103,27 @@
                     </div>
                     <article class="spacing-3">
                     
-                    	
-						<div class="sidelink">
-                           <span><a href="/todayads">Today (10)</a></span>
+ 						<div class="sidelink">
+                           <span><a href="/todayads">Today (<c:out value="${todayAdvertscount}" />)</a></span>
                         </div>
                         <div class="sidelink">
-                           <span><a href="/yesterdayads">Yesterday (5)</a></span>
-                        </div>
-                        
-                        <div class="sidelink">
-                           <span><a href="/lastweekads">Less than a week ago (5)</a></span>
+                           <span><a href="/yesterdayads">Yesterday (<c:out value="${yesterdayAdvertscount}" />)</a></span>
                         </div>
                         
                         <div class="sidelink">
-                           <span><a href="/last2weekads">Less than 2 weeks ago (5)</a></span>
+                           <span><a href="/lastweekads">Past Week (<c:out value="${pastweekAdvertscount}" />)</a></span>
+                        </div>
+                        
+                        <div class="sidelink">
+                           <span><a href="/last2weekads">Past Two Weeks (<c:out value="${past2weeksAdvertscount}" />)</a></span>
                         </div>
                         
                          <div class="sidelink">
-                           <span><a href="/lastmonth">Less than a month (5)</a></span>
+                           <span><a href="/lastmonth">Less than a month (<c:out value="${oneMonthOldAdvertscount}" />)</a></span>
                         </div>
                         
                          <div class="sidelink">
-                           <span><a href="/home">All Active (100)</a> </span>
+                           <span><a href="/morethanamonth">More than a month ago (<c:out value="${olderthanOneMonthAdvertscount}" />)</a> </span>
                         </div>
 						
                     </article>
@@ -178,36 +194,44 @@
                 <!-- Loop starts here  -->
 						<!-- Start of Middle Column -->
 						<h3>Sign Up</h3>
+						<c:if test="${not empty providedemail}">
+							<span class="providedemail">Email is already Registered!</span>
+							</c:if>
+						
 		<form:form accept-charset="UTF-8" action="main" autocomplete="off" class="home-signup" modelAttribute="projectUser">
     	<div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="oIUnZW17rd+yyLcJHLyM6f+xx4VB+Xa9M5IonS42KKA=" /></div> 
     	  <dl class="form">
             <dd>
-            	<form:input path="firstName"  type="text" name="firstName" class="textfield" placeholder="Provide First Name"  />
+            	<form:input path="firstName"  type="text" name="firstName" class="textfield textfieldtujulishe" placeholder="Provide First Name"  />
+            	<br/><p class="registerwarning">Please Provide First Name!</p>
             </dd>
           </dl>
           
            <dl class="form">
             <dd>
-            	<form:input path="lastName"  type="text" name="lastName" class="textfield" placeholder="Provide Last Name"/>
+            	<form:input path="lastName"  type="text" name="lastName" class="textfield textfieldtujulishe" placeholder="Provide Last Name"/>
+            <br/><p class="registerwarning">Please Provide Last Name</p>
             </dd>
           </dl>
 
           <dl class="form">
             <dd>
-              <form:input path="email"  type="text" name="email" class="textfield" placeholder="Your email" />
+              <form:input path="email"  type="text" name="email" class="textfield textfieldtujulishe" placeholder="Your email" />
+            	<p class="registerwarning">Please provide Email!</p>
             </dd>
           </dl>
 
           <dl class="form">
             <dd>
-              <form:input path="password" type="password" name="password" class="textfield" placeholder="Provide Password" />
+              <form:input path="password" type="password" name="password" class="textfield textfieldtujulishe" placeholder="Provide Password" />
+            	<br/><p class="registerwarning">Please provide password!</p>
               <p class="note">Tip: use at least one number and at least 7 characters.</p>
             </dd>
           </dl>
 
          
 
-          <button class="btn btn-success" type="submit">Sign up for free</button>
+          <button class="btn btn-success signupbuttontujulishe" type="submit">Sign up for free</button>
 </form:form>
 		<!-- End of Middle Column -->
                 <!-- End of loop here -->

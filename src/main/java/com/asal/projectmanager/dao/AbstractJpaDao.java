@@ -56,7 +56,9 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 	@Transactional
 	public void save(final T entity){
 		//entityManager.persist(entity);
-		entity.setCreated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		if (entity.getCreated() == null){
+			entity.setCreated(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		}
 		entity.setIsactive("Y");
 		entity.setCreatedBy(projectManagerSession.getUser());
 		//entity.setCreatedBy(ProjectManagerSession.getUser());

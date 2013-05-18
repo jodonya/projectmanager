@@ -19,20 +19,29 @@ public class ProjectUserService implements BaseService<ProjectUser> {
 	@Autowired
 	public ProjectUserDao projectUserDao;
 
+	@Transactional
 	public List<ProjectUser> getAll() {
 		return projectUserDao.findAll();
 	}
 
+	@Transactional
 	public void add(ProjectUser projectUser) {
 		projectUserDao.save(projectUser);
 	}
 
+	@Transactional
 	public void delete(ProjectUser projectUser) {
 		 projectUserDao.delete(projectUser);
 	}
 
+	@Transactional
 	public ProjectUser findOne(Long id) {
 		return projectUserDao.findOne(id);
+	}
+	
+	@Transactional
+	public ProjectUser findUser(String email){
+		return projectUserDao.findUser(email);
 	}
 
 }

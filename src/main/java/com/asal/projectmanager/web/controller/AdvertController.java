@@ -100,7 +100,26 @@ public class AdvertController {
 		
 		logedInUser = projectManagerSession.getUser();
 		model.addAttribute("logedInUser", logedInUser);
-
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
 		return "home";
 	}
 	
@@ -122,6 +141,25 @@ public class AdvertController {
 		
 		logedInUser = projectManagerSession.getUser();
 		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+
 
 		return "home";
 	}
@@ -195,6 +233,13 @@ public class AdvertController {
 			@ModelAttribute("projectUser") ProjectUser projectUser,
 			@ModelAttribute("advertComment") AdvertComment advertComment,
 			@PathVariable("advertId") Long advertId, Model model) {
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+
 
 		Advert advert = advertService.findById(advertId);
 		List<AdvertRequirement> listRequirement = advertRequirementService
@@ -210,6 +255,24 @@ public class AdvertController {
 		
 		logedInUser = projectManagerSession.getUser();
 		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);	
 
 
 		return "addetails";
@@ -486,6 +549,251 @@ public class AdvertController {
 		}
 		
 		
+	}
+	
+	/***
+	 * The Methods for filtering adverts by days posted
+	 * ***/
+	@RequestMapping(value = {"/todayads"}, method = RequestMethod.GET)
+	public String advertsToday(
+				@ModelAttribute("projectUser") ProjectUser projectUser, Model model) {
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		//List<Advert> listAdvert = advertService.findAll();
+		List<Advert> listAdvert = advertService.getTodayAdverts(); //advertService.findAllActive();
+		model.addAttribute("listAdvert", listAdvert);
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		ProjectUser logedInUser = null;
+		
+		logedInUser = projectManagerSession.getUser();
+		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
+		return "home";
+	}
+
+	@RequestMapping(value = {"/yesterdayads"}, method = RequestMethod.GET)
+	public String advertsYesterday(
+				@ModelAttribute("projectUser") ProjectUser projectUser, Model model) {
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		//List<Advert> listAdvert = advertService.findAll();
+		List<Advert> listAdvert = advertService.getYesterdayAdverts(); //advertService.findAllActive();
+		model.addAttribute("listAdvert", listAdvert);
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		ProjectUser logedInUser = null;
+		
+		logedInUser = projectManagerSession.getUser();
+		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
+		return "home";
+	}
+	@RequestMapping(value = {"/lastweekads"}, method = RequestMethod.GET)
+	public String advertsLastWeek(
+				@ModelAttribute("projectUser") ProjectUser projectUser, Model model) {
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		//List<Advert> listAdvert = advertService.findAll();
+		List<Advert> listAdvert = advertService.getPastWeekAdvert(); //.findAllActive();
+		model.addAttribute("listAdvert", listAdvert);
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		ProjectUser logedInUser = null;
+		
+		logedInUser = projectManagerSession.getUser();
+		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
+		return "home";
+	}
+	@RequestMapping(value = {"/last2weekads"}, method = RequestMethod.GET)
+	public String advertsLast2Weeks(
+				@ModelAttribute("projectUser") ProjectUser projectUser, Model model) {
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		//List<Advert> listAdvert = advertService.findAll();
+		List<Advert> listAdvert = advertService.getPast2WeeksAdverts(); //.findAllActive();
+		model.addAttribute("listAdvert", listAdvert);
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		ProjectUser logedInUser = null;
+		
+		logedInUser = projectManagerSession.getUser();
+		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
+		return "home";
+	}
+	@RequestMapping(value = {"/lastmonth"}, method = RequestMethod.GET)
+	public String advertsLastMonth(
+				@ModelAttribute("projectUser") ProjectUser projectUser, Model model) {
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		//List<Advert> listAdvert = advertService.findAll();
+		List<Advert> listAdvert = advertService.getOneMonthOldAdverts(); //.findAllActive();
+		model.addAttribute("listAdvert", listAdvert);
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		ProjectUser logedInUser = null;
+		
+		logedInUser = projectManagerSession.getUser();
+		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
+		return "home";
+	}
+	@RequestMapping(value = {"/morethanamonth"}, method = RequestMethod.GET)
+	public String advertsMorethanAMonth(
+				@ModelAttribute("projectUser") ProjectUser projectUser, Model model) {
+		
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		//List<Advert> listAdvert = advertService.findAll();
+		List<Advert> listAdvert = advertService.getOlderThanOneMonthAdverts();//.findAllActive();
+		model.addAttribute("listAdvert", listAdvert);
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		ProjectUser logedInUser = null;
+		
+		logedInUser = projectManagerSession.getUser();
+		model.addAttribute("logedInUser", logedInUser);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		
+		return "home";
 	}
 
 }

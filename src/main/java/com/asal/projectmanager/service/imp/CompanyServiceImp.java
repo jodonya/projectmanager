@@ -47,4 +47,9 @@ public class CompanyServiceImp implements CompanyService {
 		return companyDao.count();
 	}
 
+	@Transactional
+	public Company findCompany(String name) {
+		return companyDao.findCompany(name);
+	}
+
 }

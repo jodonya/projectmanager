@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +23,18 @@ import com.asal.projectmanager.dao.ProjectDao;
 import com.asal.projectmanager.dao.ProjectStatusDao;
 import com.asal.projectmanager.dao.ProjectUserDao;
 import com.asal.projectmanager.dao.UserRoleDao;
+import com.asal.projectmanager.domain.AdvertCategory;
+import com.asal.projectmanager.domain.Company;
 import com.asal.projectmanager.domain.Location;
 import com.asal.projectmanager.domain.Project;
 import com.asal.projectmanager.domain.ProjectStatus;
 import com.asal.projectmanager.domain.ProjectUser;
 import com.asal.projectmanager.domain.SignInLog;
 import com.asal.projectmanager.domain.UserRole;
+import com.asal.projectmanager.service.AdvertCategoryService;
+import com.asal.projectmanager.service.AdvertService;
+import com.asal.projectmanager.service.CompanyService;
+import com.asal.projectmanager.service.ProjectUserService;
 import com.asal.projectmanager.service.SignInLogService;
 
 @Controller
@@ -59,6 +64,13 @@ public class LoginController {
 	@Autowired
 	SignInLogService signInLogService;
 	
+	@Autowired
+	AdvertService advertService;
+	
+	@Autowired
+	CompanyService companyService;
+	@Autowired
+	AdvertCategoryService advertCategoryService;	
 	
 	@RequestMapping(value="/welcome", method = RequestMethod.GET)
 	@Transactional
@@ -108,6 +120,24 @@ public class LoginController {
 		
 		logger.info(" I have set the logged in user to "+projectManagerSession.getUser().getFirstName());
 		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
 
 		//posts
 		return "redirect:/home";
@@ -154,6 +184,31 @@ public class LoginController {
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 		logger.info("XXXXXXXXXXXXXXXXX Entering Login GET !");
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
 
 		return "login";
  
@@ -162,7 +217,32 @@ public class LoginController {
 	@RequestMapping(value={"/main"}, method = RequestMethod.GET)
 	public String main(@ModelAttribute("projectUser") ProjectUser projectUser, ModelMap model) {
 		logger.info("XXXXXXXXXXXXXXXXX Main Page !");
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
 
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);	
+		
 		return "main";
  
 	}
@@ -170,6 +250,41 @@ public class LoginController {
 	@RequestMapping(value={"/main"}, method = RequestMethod.POST)
 	public String signUp(@ModelAttribute("projectUser") ProjectUser projectUser, ModelMap model) {
 		logger.info("XXXXXXXXXXXXXXXXX Sign Up !");
+		
+		
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
+		
+		//If the email was not used then register, otherwise, cannot register
+		ProjectUser existingUser = null;
+		existingUser = projectUserDao.findUser(projectUser.getEmail());
+		
+		
+		if (existingUser != null){
+			model.addAttribute("providedemail", existingUser.getEmail());
+			projectUser = new ProjectUser();
+			model.addAttribute("projectUser", projectUser);
+			return "main";
+		} 
+		
+		//model.addAttribute("providedemail", null);
+		
 		
 		projectUser.setJoinDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		projectUserDao.save(projectUser);
@@ -182,6 +297,9 @@ public class LoginController {
 		userRole.setUser(projectUser);
 		
 		userRoleDao.save(userRole);
+		
+		
+	
 
 		
 
@@ -201,6 +319,32 @@ public class LoginController {
 	public String loginerror(ModelMap model) {
  
 		model.addAttribute("error", "true");
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
 		return "login";
  
 	}
@@ -211,11 +355,37 @@ public class LoginController {
 		//model.put("user", null);
 		model.addAttribute("username", "");
 		model.addAttribute("logedInUser", new ProjectUser());
+		
+		List<Company> listCompany = companyService.findAll();
+		List<AdvertCategory> listCategory = advertCategoryService.findAll();
+
+		
+		model.addAttribute("listCompany", listCompany);
+		model.addAttribute("listCategory", listCategory);
+		
 		SecurityContextHolder.getContext().setAuthentication(null);
 		logger.info("LLLLLLLLLLLLLLL Initiate logout for "+session.getId());
 		//Everything else doesnt seem to work, so I had to try this on 18/04/2012
 		session.invalidate();
 		//session.invalidate();
+		
+		/****
+		 *Setting the counts 
+		 ****/
+		Long todayAdvertscount = advertService.getTodayAdvertsCount();
+		Long yesterdayAdvertscount = advertService.getYesterdayAdvertsCount();
+		Long pastweekAdvertscount = advertService.getPastWeekAdvertCount();
+		Long past2weeksAdvertscount = advertService.getPast2WeeksAdvertsCount();
+		Long oneMonthOldAdvertscount = advertService.getOneMonthOldAdvertsCount();
+		Long olderthanOneMonthAdvertscount = advertService.getOlderThanOneMonthAdvertsCount();
+		
+		model.addAttribute("todayAdvertscount", todayAdvertscount);
+		
+		model.addAttribute("yesterdayAdvertscount", yesterdayAdvertscount);
+		model.addAttribute("pastweekAdvertscount", pastweekAdvertscount);
+		model.addAttribute("past2weeksAdvertscount", past2weeksAdvertscount);
+		model.addAttribute("oneMonthOldAdvertscount", oneMonthOldAdvertscount);
+		model.addAttribute("olderthanOneMonthAdvertscount", olderthanOneMonthAdvertscount);
 		return "login";
  
 	}

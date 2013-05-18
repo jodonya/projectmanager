@@ -1,0 +1,16 @@
+.registerwarning,.matchingvalues, .registerwarninglogin,  {
+	color: red;
+	display: none;
+}
+
+.errorblock {
+	color: red;
+}
+
+.providedemail{
+	color: red;
+}
+
+.registerwarning{
+	color: red;
+}

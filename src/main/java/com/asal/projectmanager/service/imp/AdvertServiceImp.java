@@ -79,4 +79,66 @@ public class AdvertServiceImp implements AdvertService {
 		return advertDao.findAdvert(name);
 	}
 
+	
+	/***
+	 * Grouping Live Adverts By Date
+	 * */
+	public List<Advert> getTodayAdverts() {
+		return advertDao.getTodayAdverts();
+	}
+
+	public List<Advert> getYesterdayAdverts() {
+		// TODO Auto-generated method stub
+		return advertDao.getYesterdayAdverts();
+	}
+
+	public List<Advert> getPastWeekAdvert() {
+		// TODO Auto-generated method stub
+		return advertDao.getPastWeekAdvert();
+	}
+
+	public List<Advert> getPast2WeeksAdverts() {
+		return advertDao.getPast2WeeksAdverts();
+	}
+
+	public List<Advert> getOneMonthOldAdverts() {
+		// TODO Auto-generated method stub
+		return advertDao.getOneMonthOldAdverts();
+	}
+
+	public List<Advert> getOlderThanOneMonthAdverts() {
+		// TODO Auto-generated method stub
+		return advertDao.getOlderThanOneMonthAdverts();
+	}
+
+	public Long getTodayAdvertsCount() {
+		// TODO Auto-generated method stub
+		return advertDao.getTodayAdvertsCount();
+	}
+
+	public Long getYesterdayAdvertsCount() {
+		// TODO Auto-generated method stub
+		return advertDao.getYesterdayAdvertsCount();
+	}
+
+	public Long getPastWeekAdvertCount() {
+		// TODO Auto-generated method stub
+		return advertDao.getPastWeekAdvertCount();
+	}
+
+	public Long getPast2WeeksAdvertsCount() {
+		// TODO Auto-generated method stub
+		return advertDao.getPast2WeeksAdvertsCount();
+	}
+
+	public Long getOneMonthOldAdvertsCount() {
+		// TODO Auto-generated method stub
+		return advertDao.getOneMonthOldAdvertsCount();
+	}
+
+	public Long getOlderThanOneMonthAdvertsCount() {
+		// TODO Auto-generated method stub
+		return advertDao.getOlderThanOneMonthAdvertsCount();
+	}
+
 }
